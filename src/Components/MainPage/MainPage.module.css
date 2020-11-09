@@ -1,0 +1,28 @@
+.MainPage {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.gallery {
+    width: 90vw;
+    min-height: 100vh;
+    column-count: 3;
+    margin: auto;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*flex-wrap: wrap;*/
+}
+
+.gallery img {
+    width: 30vw;
+}
+
+/*.galleryImg {*/
+/*    width: 30vw;*/
+/*}*/
+
+/*.galleryImg:nth-child(2n+1) {*/
+/*    height: 350px;*/
+/*    width: 30vw;*/
+/*}*/
