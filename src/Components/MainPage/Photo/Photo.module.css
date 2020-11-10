@@ -1,0 +1,30 @@
+.Photo {
+    position: relative;
+}
+
+.photoAdds {
+    /*display: none;*/
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    background: rgba(0, 0, 0, .2);
+    box-shadow: 0 -8px 13px 0 rgba(0, 0, 0, .2);
+}
+
+.photoAdds div {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*background: red;*/
+}
+
+.photoAdds div:hover {
+    cursor: pointer;
+}

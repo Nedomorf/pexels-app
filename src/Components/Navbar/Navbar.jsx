@@ -1,5 +1,6 @@
 import React from "react";
 import s from './Navbar.module.css';
+import {SearchOutlined} from '@ant-design/icons';
 
 const Navbar = () => {
     return (
@@ -16,9 +17,10 @@ const Navbar = () => {
             </div>
             <div className={s.search}>
                 <input type="text" placeholder="Поиск бесплатных изображений"/>
-                <span>
-                    <img src="https://img.icons8.com/fluent-systems-filled/344/search.png" alt=""/>
-                </span>
+                <SearchOutlined style={{ fontSize: `20px` }}/>
+                {/*<span>*/}
+                {/*    <img src="https://img.icons8.com/fluent-systems-filled/344/search.png" alt=""/>*/}
+                {/*</span>*/}
             </div>
         </div>
     )

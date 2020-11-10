@@ -2,10 +2,10 @@
     /*background: none;*/
     background: rgb(35, 42, 52);
     height: 70px;
-    width: 100vw;
     display: flex;
     align-items: center;
-    position: fixed;
+    position: sticky;
+    z-index: 999;
     top: 0;
     left: 0;
 }
@@ -39,6 +39,7 @@
     height: 60%;
     margin-left: 30px;
     position: relative;
+    /*visibility: hidden;*/
 }
 
 .search input {
@@ -68,8 +69,4 @@
 
 .search span:hover {
     cursor: pointer;
-}
-
-.search span img {
-    width: 25px;
 }

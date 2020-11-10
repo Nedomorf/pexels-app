@@ -1,45 +1,37 @@
-import MainPage from "./MainPage";
-import React, {useEffect} from "react";
+import Gallery from "./Gallery/Gallery";
+import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {setPhotos} from "../../Redux/main-reducer";
+import {setPhotosAPI} from "../../api/api";
 
 const MainPageContainer = (props) => {
 
-    console.log(props)
-
-    const config = {
-        method: "GET",
-        headers: {
-            "Authorization": "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf",
-        },
-        withCredentials: true
-    }
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
-        fetch("https://api.pexels.com/v1/curated?per_page=20", config)
-            .then(res => res.json())
-            .then(result => {
-                console.log(result);
-                let newPhotos = [];
-                for (let i = 0; i < result.photos.length; i++) {
-                    newPhotos[i] = result.photos[i].src.large;
-                }
-                props.setPhotos(newPhotos);
-            })
+        setPhotosAPI(page).then(res => {
+            console.log('useEffect:', res);
+            // let newPhotos = [];
+            // for (let i = 0; i < res.photos.length; i++) {
+            //     newPhotos[i] = res.photos[i].src.large;
+            // }
+            debugger
+            props.setPhotos(res.photos);
+        })
     }, [])
 
     return (
-        <MainPage {...props}/>
+        <Gallery {...props} setPhotosAPI={setPhotosAPI} page={page} setPage={setPage}/>
     )
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return {
         photos: state.Main.photos
     }
 }
 
-let mapDispatchToProps = {setPhotos}
+const mapDispatchToProps = {setPhotos}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPageContainer);
