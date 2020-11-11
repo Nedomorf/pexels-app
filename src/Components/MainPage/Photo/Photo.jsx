@@ -6,19 +6,27 @@ const Photo = (props) => {
 
     return (
         <div className={s.Photo}>
-            <img src={props.url} alt=""/>
+            <img
+                src={props.url}
+                alt=""
+            />
             <div className={s.photoAdds}>
-                <div>
-                    <VerticalAlignBottomOutlined style={{fontSize: `20px`, color: `#fff`}} />
+                <div className={s.photographer}>
+                    {props.photographer}
                 </div>
                 <div>
-                    <PlusCircleOutlined style={{fontSize: `20px`, color: `#fff`}}/>
+                    <a href={props.url} download="123.jpg">
+                        <VerticalAlignBottomOutlined style={{fontSize: `20px`}} className={s.addsElement}/>
+                    </a>
+                </div>
+                <div>
+                    <PlusCircleOutlined style={{fontSize: `20px`}} className={s.addsElement}/>
                 </div>
                 <div>
                     {
                         props.isLiked
                             ? <HeartTwoTone style={{fontSize: `20px`}} twoToneColor={'#FF0000'}/>
-                            : <HeartOutlined style={{fontSize: `20px`, color: `#fff`}}/>
+                            : <HeartOutlined style={{fontSize: `20px`}} className={s.addsElement}/>
                     }
                 </div>
             </div>

@@ -37,9 +37,9 @@ const Gallery = (props) => {
                         props.photos.map((photo, index) => {
                             return (index === props.photos.length - 5)
                                 ? <Waypoint onEnter={onEnter}>
-                                    <div><Photo url={photo.src.large} isLiked={photo.liked}/></div>
+                                    <div><Photo url={photo.src.large} isLiked={photo.liked} photographer={photo.photographer}/></div>
                                 </Waypoint>
-                                : <div><Photo url={photo.src.large} isLiked={photo.liked}/></div>
+                                : <div><Photo url={photo.src.large} isLiked={photo.liked} photographer={photo.photographer}/></div>
                         })
                     }
                 </Masonry>

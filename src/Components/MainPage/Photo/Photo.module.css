@@ -2,29 +2,53 @@
     position: relative;
 }
 
+.Photo:hover {
+    cursor: pointer;
+}
+
+.Photo:hover .photoAdds {
+    opacity: 1;
+}
+
 .photoAdds {
-    /*display: none;*/
+    display: flex;
+    opacity: 0;
     position: absolute;
     bottom: 15px;
     width: 100%;
     height: 50px;
-    display: flex;
     justify-content: right;
     align-items: center;
     background: rgba(0, 0, 0, .2);
     box-shadow: 0 -8px 13px 0 rgba(0, 0, 0, .2);
+    transition: opacity .2s ease;
 }
 
 .photoAdds div {
     height: 30px;
-    width: 30px;
+    min-width: 30px;
     margin-right: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
     /*background: red;*/
 }
 
 .photoAdds div:hover {
     cursor: pointer;
+}
+
+.photographer {
+    position: absolute;
+    left: 15px;
+}
+
+.addsElement {
+    color: #bababa;
+    transition: color .15s ease;
+}
+
+.addsElement:hover {
+    color: #ffffff;
 }
