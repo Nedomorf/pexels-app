@@ -22,6 +22,7 @@ const Gallery = (props) => {
     };
 
     return (
+        props.isInitialize &&
         <div className={s.GalleryContainer}>
             <div className={s.gallery}>
                 <Masonry

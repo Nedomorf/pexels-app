@@ -1,9 +1,9 @@
-import {chunk} from "lodash";
-
 const SET_PHOTOS = "SET-PHOTOS";
+const SET_INITIALIZE = "SET-INITIALIZE";
 
 let initialState = {
-    photos: []
+    photos: [],
+    isInitialize: false
 }
 
 let mainReducer = (state = initialState, action) => {
@@ -11,19 +11,15 @@ let mainReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case SET_PHOTOS:
-            // let arr = [...state.photos, ...action.photos];
-            // let subArr = [];
-            // if (arr[0]) {
-            //     subArr = chunk(arr, 3);
-            //     const transpose = matrix => matrix[0].map((col, i) => matrix.map(row => row[i]));
-            //     let transposedMatrix = transpose(subArr);
-            //     subArr = transposedMatrix.flat(Infinity);
-            // }
             return {
                 ...state,
                 photos: [...state.photos, ...action.photos]
-            }
-
+            };
+        case SET_INITIALIZE:
+            return {
+                ...state,
+                isInitialize: action.initialize
+            };
         default:
             return state;
 
@@ -33,6 +29,11 @@ let mainReducer = (state = initialState, action) => {
 export const setPhotos = (photos) => ({
     type: SET_PHOTOS,
     photos
+})
+
+export const setInitialize = (initialize) => ({
+    type: SET_INITIALIZE,
+    initialize
 })
 
 export default mainReducer;

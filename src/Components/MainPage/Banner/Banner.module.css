@@ -12,14 +12,21 @@
     z-index: 1;
 }
 
-.photographer {
+.photographer a {
     position: absolute;
     color: #bababa;
     bottom: 20px;
     right: 20px;
     z-index: 2;
     font-size: 12px;
+    text-decoration: none;
+    outline: none;
     transition: color .1s ease;
+}
+
+.Banner a:hover {
+    color: white;
+    cursor: pointer;
 }
 
 .Banner p:hover {

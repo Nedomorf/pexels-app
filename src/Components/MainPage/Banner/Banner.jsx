@@ -7,6 +7,7 @@ const Banner = (props) => {
 
     const [url, setUrl] = useState('');
     const [photographer, setPhotographer] = useState('');
+    const [photographerUrl, setPhotographerUrl] = useState('');
 
     const getBannerPhoto = () => {
         let photoId = Math.random() * 9999999;
@@ -14,8 +15,10 @@ const Banner = (props) => {
         getPhotoAPI(photoId, true).then(photo => {
             console.log(photo)
             if (photo.src) {
-            setUrl(photo.src.landscape);
-            setPhotographer(photo.photographer);
+                setUrl(photo.src.landscape);
+                setPhotographer(photo.photographer);
+                setPhotographerUrl(photo.photographer_url);
+                props.setInitialize(true);
             } else getBannerPhoto();
         })
     }
@@ -25,6 +28,7 @@ const Banner = (props) => {
     }, [])
 
     return (
+        props.isInitialize &&
         <div className={s.Banner}>
             <div className={s.bannerContent}>
                 <h1>Лучшие бесплатные стоковые фото и видео от талантливых авторов.</h1>
@@ -36,7 +40,8 @@ const Banner = (props) => {
                 </div>
             </div>
             {
-                (photographer !== '') && <p className={s.photographer}>Фотограф: {photographer}</p>
+                (photographer !== '') &&
+                <p className={s.photographer}><a href={photographerUrl} target="_blank">Фотограф: {photographer}</a></p>
             }
             <img src={url} alt=""/>
         </div>

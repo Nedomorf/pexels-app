@@ -1,33 +1,19 @@
-import React, {useEffect} from "react";
+import React, {useState} from "react";
 import s from './Navbar.module.css';
 import {SearchOutlined} from '@ant-design/icons';
 import {SearchField} from "../Common/SearchField/SearchField";
 
 const Navbar = () => {
 
-    // let isVisiable = true;
-    // let rectTop = 0;
-    // let rectBottom = 0;
-    //
-    // useEffect(() => {
-    //     const navRect = document.getElementById('Navbar');
-    //     if (navRect) {
-    //         let rect = navRect.getBoundingClientRect();
-    //         rectTop = rect.top;
-    //         rectBottom = rect.bottom;
-    //         isVisiable = (rectTop >= 0) && (rectBottom <= window.innerHeight);
-    //         debugger
-    //     }
-    // })
-    //
-    // window.onscroll = () => {
-    //     isVisiable = (rectTop >= 0) && (rectBottom <= window.innerHeight);
-    // }
-    //
-    // if( !isVisiable) alert('123')
+    const [visiable, setVisiable] = useState(false);
+
+    window.onscroll = () => {
+        let scrollTop = document.body.parentElement.scrollTop;
+        (scrollTop > 100) ? setVisiable(true) : setVisiable(false)
+    }
 
     return (
-        <div className={s.Navbar} id="Navbar">
+        <div className={`${s.Navbar} ${visiable && s.NavVisiable}`}>
             <div className={s.logo}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 32 32">
                     <path d="M2 0h28a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"
@@ -38,9 +24,8 @@ const Navbar = () => {
                 </svg>
                 <p>Pexels</p>
             </div>
-            <div className={s.search}>
+            <div className={`${s.search} ${visiable && s.searchVisiable}`}>
                 <SearchField text={"Поиск бесплатных изображений"}/>
-                {/*<SearchOutlined style={{fontSize: `20px`}}/>*/}
             </div>
         </div>
     )

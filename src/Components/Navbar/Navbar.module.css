@@ -1,12 +1,16 @@
 .Navbar {
     background: none;
-    /*background: rgb(35, 42, 52);*/
     height: 70px;
+    width: 100vw;
     display: flex;
     align-items: center;
     position: fixed;
     z-index: 999;
     top: 0;
+}
+
+.NavVisiable {
+    background: rgb(35, 42, 52);
 }
 
 .logo {
@@ -34,11 +38,15 @@
 }
 
 .search {
-    width: 40vw;
+    width: 48vw;
     height: 60%;
     margin-left: 30px;
     position: relative;
-    /*visibility: hidden;*/
+    visibility: hidden;
+}
+
+.searchVisiable {
+    visibility: visible;
 }
 
 .search input {

@@ -2,7 +2,7 @@ import Gallery from "../Gallery/Gallery";
 import React, {useEffect, useState} from "react";
 import s from './MainPage.module.css';
 import {connect} from "react-redux";
-import {setPhotos} from "../../Redux/main-reducer";
+import {setInitialize, setPhotos} from "../../Redux/main-reducer";
 import {setPhotosAPI} from "../../api/api";
 import Banner from "./Banner/Banner";
 
@@ -19,7 +19,7 @@ const MainPageContainer = (props) => {
 
     return (
         <div className={s.MainPage}>
-            <Banner/>
+            <Banner {...props}/>
             <Gallery {...props} setPhotosAPI={setPhotosAPI} page={page} setPage={setPage}/>
         </div>
     )
@@ -27,11 +27,12 @@ const MainPageContainer = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        photos: state.Main.photos
+        photos: state.Main.photos,
+        isInitialize: state.Main.isInitialize
     }
 }
 
-const mapDispatchToProps = {setPhotos}
+const mapDispatchToProps = {setPhotos, setInitialize}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPageContainer);

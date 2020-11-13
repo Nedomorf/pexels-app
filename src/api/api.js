@@ -1,7 +1,7 @@
 const config = {
     headers: {
-        "Authorization": "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf", // наш
-        // "Authorization": "563492ad6f91700001000001a170c8b82295491f89605ae0c312c2c0", // левый
+        // "Authorization": "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf", // наш
+        "Authorization": "563492ad6f91700001000001a170c8b82295491f89605ae0c312c2c0", // левый
     },
     withCredentials: true
 }
