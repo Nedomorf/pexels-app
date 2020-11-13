@@ -1,0 +1,26 @@
+.searchField {
+    border-radius: 7px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: rgb(123, 125, 126);
+}
+
+.searchIcon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 55px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 7px 7px 0;
+    background: #fff;
+}
+
+.searchIcon:hover {
+    cursor: pointer;
+}

@@ -1,6 +1,6 @@
 import s from './Gallery.module.css';
 import React from "react";
-import Photo from "../Photo/Photo";
+import Photo from "../MainPage/Photo/Photo";
 import {Waypoint} from "react-waypoint";
 import Masonry from "react-masonry-css";
 
@@ -11,12 +11,8 @@ const Gallery = (props) => {
         props.setPage(page);
         props.setPhotosAPI(page).then(res => {
             console.log('scroll:', res);
-            // let newPhotos = [];
-            // for (let i = 0; i < res.photos.length; i++) {
-            //     newPhotos[i] = res.photos[i].src.large;
-            // }
             props.setPhotos(res.photos);
-        })
+        });
     }
 
     const breakpointColumnsObj = {
@@ -36,10 +32,20 @@ const Gallery = (props) => {
                     {
                         props.photos.map((photo, index) => {
                             return (index === props.photos.length - 5)
-                                ? <Waypoint onEnter={onEnter}>
-                                    <div><Photo url={photo.src.large} isLiked={photo.liked} photographer={photo.photographer}/></div>
+                                ? <Waypoint onEnter={onEnter} key={photo.id}>
+                                    <div key={photo.id}>
+                                        <Photo url={photo.src.large} isLiked={photo.liked}
+                                               photographer={photo.photographer}
+                                               photoId={photo.id}
+                                        />
+                                    </div>
                                 </Waypoint>
-                                : <div><Photo url={photo.src.large} isLiked={photo.liked} photographer={photo.photographer}/></div>
+                                : <div key={photo.id}>
+                                    <Photo url={photo.src.large} isLiked={photo.liked}
+                                           photographer={photo.photographer}
+                                           photoId={photo.id}
+                                    />
+                                </div>
                         })
                     }
                 </Masonry>

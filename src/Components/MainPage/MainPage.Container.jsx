@@ -1,8 +1,10 @@
-import Gallery from "./Gallery/Gallery";
+import Gallery from "../Gallery/Gallery";
 import React, {useEffect, useState} from "react";
+import s from './MainPage.module.css';
 import {connect} from "react-redux";
 import {setPhotos} from "../../Redux/main-reducer";
 import {setPhotosAPI} from "../../api/api";
+import Banner from "./Banner/Banner";
 
 const MainPageContainer = (props) => {
 
@@ -10,18 +12,16 @@ const MainPageContainer = (props) => {
 
     useEffect(() => {
         setPhotosAPI(page).then(res => {
-            console.log('useEffect:', res);
-            // let newPhotos = [];
-            // for (let i = 0; i < res.photos.length; i++) {
-            //     newPhotos[i] = res.photos[i].src.large;
-            // }
-            debugger
+            console.log('useEffect', res)
             props.setPhotos(res.photos);
-        })
+        });
     }, [])
 
     return (
-        <Gallery {...props} setPhotosAPI={setPhotosAPI} page={page} setPage={setPage}/>
+        <div className={s.MainPage}>
+            <Banner/>
+            <Gallery {...props} setPhotosAPI={setPhotosAPI} page={page} setPage={setPage}/>
+        </div>
     )
 }
 
