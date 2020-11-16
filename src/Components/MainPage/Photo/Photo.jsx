@@ -8,24 +8,24 @@ const Photo = (props) => {
 
     const [like, setLike] = useState(false);
 
-    useEffect(() => {
-        // setLike(props.isLiked);
-        let storageLikes = localStorage.getItem('likes');
-        likes = storageLikes.split(',');
-        // console.log('лайки:', likes)
-        // return () => {
-        //     alert('123')
-        //     localStorage.setItem('likes', likes)
-        // }
-    }, [likes])
+    // useEffect(() => {
+    //     // setLike(props.isLiked);
+    //     let storageLikes = localStorage.getItem('likes');
+    //     likes = storageLikes.split(',');
+    //     // console.log('лайки:', likes)
+    //     // return () => {
+    //     //     alert('123')
+    //     //     localStorage.setItem('likes', likes)
+    //     // }
+    // }, [likes])
 
     const changeStorage = (liked) => {
         setLike(liked);
         console.log(like);
-        liked
-            ? likes.push(props.photoId)
-            : likes.splice(likes.indexOf(props.photoId), 1)
-        localStorage.setItem('likes', likes)
+        // liked
+        //     ? likes.push(props.photoId)
+        //     : likes.splice(likes.indexOf(props.photoId), 1)
+        // localStorage.setItem('likes', likes)
     }
 
     return (
