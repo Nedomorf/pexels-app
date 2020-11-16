@@ -71,13 +71,10 @@
     display: flex;
 }
 
-.ideas p {
+.keyWord {
     color: #bababa;
     margin-left: 5px;
-}
-
-.ideas span {
-    color: #bababa;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 850px) {

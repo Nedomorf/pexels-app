@@ -52,3 +52,22 @@
 .addsElement:hover {
     color: #ffffff;
 }
+
+@media screen and (max-width: 850px) {
+    .photoAdds {
+        opacity: 1;
+    }
+    .photographer {
+        opacity: 0;
+        transition: opacity .2s ease;
+    }
+    .Photo:hover .photographer {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 590px) {
+    .photographer {
+        opacity: 1;
+    }
+}

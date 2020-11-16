@@ -1,10 +1,12 @@
 import Gallery from "../Gallery/Gallery";
 import React, {useEffect, useState} from "react";
+import {Route, withRouter} from "react-router-dom";
 import s from './MainPage.module.css';
 import {connect} from "react-redux";
 import {setInitialize, setPhotos} from "../../Redux/main-reducer";
 import {setPhotosAPI} from "../../api/api";
 import Banner from "./Banner/Banner";
+import {compose} from "redux";
 
 const MainPageContainer = (props) => {
 
@@ -12,14 +14,17 @@ const MainPageContainer = (props) => {
 
     useEffect(() => {
         setPhotosAPI(page).then(res => {
-            console.log('useEffect', res)
-            props.setPhotos(res.photos);
+            console.log('useEffect', res);
+            props.setPhotos(res.photos, false);
+            props.setInitialize(true);
         });
     }, [])
 
     return (
         <div className={s.MainPage}>
-            <Banner {...props}/>
+            <Route exact path="/">
+                <Banner {...props}/>
+            </Route>
             <Gallery {...props} setPhotosAPI={setPhotosAPI} page={page} setPage={setPage}/>
         </div>
     )
@@ -35,5 +40,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {setPhotos, setInitialize}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPageContainer);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter
+)(MainPageContainer);
 

@@ -9,9 +9,12 @@ const Gallery = (props) => {
     const onEnter = () => {
         let page = props.page + 1;
         props.setPage(page);
-        props.setPhotosAPI(page).then(res => {
+        let isSearch = false;
+        if (props.history.location.pathname !== '/') isSearch = true;
+        let query = props.history.location.pathname.replace('/search/', '');
+        props.setPhotosAPI(page, isSearch, query).then(res => {
             console.log('scroll:', res);
-            props.setPhotos(res.photos);
+            props.setPhotos(res.photos, false);
         });
     }
 
@@ -32,21 +35,17 @@ const Gallery = (props) => {
                 >
                     {
                         props.photos.map((photo, index) => {
-                            return (index === props.photos.length - 5)
-                                ? <Waypoint onEnter={onEnter} key={photo.id}>
-                                    <div key={photo.id}>
-                                        <Photo url={photo.src.large} isLiked={photo.liked}
-                                               photographer={photo.photographer}
-                                               photoId={photo.id}
-                                        />
-                                    </div>
-                                </Waypoint>
-                                : <div key={photo.id}>
+                            const DIV = (
+                                <div key={index}>
                                     <Photo url={photo.src.large} isLiked={photo.liked}
                                            photographer={photo.photographer}
                                            photoId={photo.id}
                                     />
                                 </div>
+                            )
+                            return (index === props.photos.length - 5)
+                                ? <Waypoint onEnter={onEnter}>{DIV}</Waypoint>
+                                : DIV
                         })
                     }
                 </Masonry>

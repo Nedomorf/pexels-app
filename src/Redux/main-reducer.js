@@ -11,10 +11,17 @@ let mainReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case SET_PHOTOS:
-            return {
-                ...state,
-                photos: [...state.photos, ...action.photos]
-            };
+            if (action.reset) {
+                return {
+                    ...state,
+                    photos: []
+                };
+            } else {
+                return {
+                    ...state,
+                    photos: [...state.photos, ...action.photos]
+                };
+            }
         case SET_INITIALIZE:
             return {
                 ...state,
@@ -26,9 +33,9 @@ let mainReducer = (state = initialState, action) => {
     }
 
 }
-export const setPhotos = (photos) => ({
+export const setPhotos = (photos, reset) => ({
     type: SET_PHOTOS,
-    photos
+    photos, reset
 })
 
 export const setInitialize = (initialize) => ({

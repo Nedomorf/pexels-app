@@ -54,8 +54,81 @@
     height: 100%;
 }
 
+.logoContainer {
+    text-decoration: none;
+}
+
+.navs {
+    color: white;
+    font-size: 18px;
+    display: flex;
+    position: relative;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.navsElement {
+    transition: .05s linear;
+    margin-right: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.navsElement:nth-child(1) {
+    margin-left: 25px;
+}
+
+.more {
+    font-size: 32px;
+    margin-right: 25px;
+    transform: rotate(90deg);
+    transition: .05s linear;
+    position: absolute;
+    right: -55px;
+}
+
+.btn {
+    background: #05a081;
+    border-radius: 4px;
+    padding: 7px;
+    width: 180px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: -250px;
+    top: -10px;
+}
+
+.navsElement:hover {
+    cursor: pointer;
+    color: rgb(123, 125, 126);
+}
+
+.more:hover {
+    cursor: pointer;
+    color: rgb(123, 125, 126);
+}
+
+.btn:hover {
+    cursor: pointer;
+    opacity: .85;
+    transform: translateY(1px);
+}
+
 @media screen and (max-width: 1000px) {
     .logo p {
         display: none;
+    }
+    .navsElement {
+        display: none;
+    }
+    .btn {
+        right: -40vw;
+    }
+    .more {
+        right: -15vw;
     }
 }

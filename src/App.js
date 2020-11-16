@@ -4,6 +4,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import MainPageContainer from "./Components/MainPage/MainPage.Container";
 import {connect} from "react-redux";
 import {PageLoader} from "./Components/Common/Loaders/PageLoader/PageLoader";
+import {setPhotos} from "./Redux/main-reducer";
 
 function App(props) {
     return (
@@ -15,8 +16,9 @@ function App(props) {
             {/*        <MainPageContainer/>*/}
             {/*    </div>*/}
             {/*}*/}
-            {props.isInitialize && <Navbar/>}
             <MainPageContainer/>
+            {props.isInitialize && <Navbar setPhotos={props.setPhotos}/>}
+
             {!props.isInitialize && <PageLoader/>}
         </div>
     );
@@ -28,7 +30,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = {setPhotos}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
