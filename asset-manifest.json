@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/pexels-app/static/css/main.c7d920a3.chunk.css",
+    "main.js": "/pexels-app/static/js/main.fa031df7.chunk.js",
+    "main.js.map": "/pexels-app/static/js/main.fa031df7.chunk.js.map",
+    "runtime-main.js": "/pexels-app/static/js/runtime-main.1253e01c.js",
+    "runtime-main.js.map": "/pexels-app/static/js/runtime-main.1253e01c.js.map",
+    "static/js/2.3cf413c9.chunk.js": "/pexels-app/static/js/2.3cf413c9.chunk.js",
+    "static/js/2.3cf413c9.chunk.js.map": "/pexels-app/static/js/2.3cf413c9.chunk.js.map",
+    "static/js/3.b3fa2665.chunk.js": "/pexels-app/static/js/3.b3fa2665.chunk.js",
+    "static/js/3.b3fa2665.chunk.js.map": "/pexels-app/static/js/3.b3fa2665.chunk.js.map",
+    "index.html": "/pexels-app/index.html",
+    "static/css/main.c7d920a3.chunk.css.map": "/pexels-app/static/css/main.c7d920a3.chunk.css.map",
+    "static/js/2.3cf413c9.chunk.js.LICENSE.txt": "/pexels-app/static/js/2.3cf413c9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1253e01c.js",
+    "static/js/2.3cf413c9.chunk.js",
+    "static/css/main.c7d920a3.chunk.css",
+    "static/js/main.fa031df7.chunk.js"
+  ]
+}
