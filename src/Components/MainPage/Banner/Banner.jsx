@@ -3,6 +3,7 @@ import s from './Banner.module.css';
 import {getPhotoAPI, setPhotosAPI} from "../../../api/api";
 import SearchField from "../../Common/SearchField/SearchField";
 import {NavLink} from "react-router-dom";
+import i18next from "i18next";
 
 const Banner = (props) => {
 
@@ -43,12 +44,12 @@ const Banner = (props) => {
         props.isInitialize &&
         <div className={s.Banner}>
             <div className={s.bannerContent}>
-                <h1>Лучшие бесплатные стоковые фото и видео от талантливых авторов.</h1>
+                <h1>{i18next.t('bannerContentText')}</h1>
                 <div>
-                    <SearchField text={"Ищите бесплатные фото и видео"}/>
+                    <SearchField text={i18next.t('bannerSearchPlaceholder')}/>
                 </div>
                 <div className={s.ideas}>
-                    Идеи для поиска:
+                    {i18next.t('ideasText')}
                     {/*<p>кофе</p><span>,</span><p>шоколад</p><span>,</span><p>кошки</p>*/}
                     {
                         shortKeys.map(word => {
@@ -64,12 +65,12 @@ const Banner = (props) => {
                             )
                         })
                     }
-                    <NavLink className={s.keyWord} to='/search'><p>больше</p></NavLink>
+                    <NavLink className={s.keyWord} to='/search'><p>{i18next.t('moreIdeasText')}</p></NavLink>
                 </div>
             </div>
             {
                 (photographer !== '') &&
-                <p className={s.photographer}><a href={photographerUrl} target="_blank">Фотограф: {photographer}</a></p>
+                <p className={s.photographer}><a href={photographerUrl} target="_blank">{i18next.t('photographer')}{photographer}</a></p>
             }
             <img src={url} alt=""/>
         </div>

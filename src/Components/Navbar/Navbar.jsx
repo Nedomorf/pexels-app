@@ -45,7 +45,7 @@ const Navbar = (props) => {
                 <div className={s.navsElement}>Коллекция</div>
                 <div className={s.navsElement}>Лицензия</div>
                 <MoreOutlined className={s.more}/>
-                <div className={s.btn}>Присоедениться</div>
+                <div className={s.btn} onClick={() => props.setLanguage('ru')}>Присоедениться</div>
             </div>
         </div>
     )
