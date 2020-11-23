@@ -11,7 +11,6 @@ const Banner = (props) => {
     const [photographer, setPhotographer] = useState('');
     const [photographerUrl, setPhotographerUrl] = useState('');
 
-    let keyWords = ['dogs', 'cats', 'coffee', 'summer', 'winter', 'autumn', 'spring', 'home', 'baby', 'cars'];
     const [shortKeys, setShortKeys] = useState([]);
 
     const getBannerPhoto = () => {
@@ -31,9 +30,9 @@ const Banner = (props) => {
 
     useEffect(() => {
         getBannerPhoto();
-        for (let i = 0; i < 4; i++) {
-            const word = keyWords[Math.floor(Math.random() * keyWords.length)];
-            keyWords.splice(keyWords.indexOf(word), 1);
+        for (let i = 0; i < 7; i++) {
+            const word = props.keyWords[Math.floor(Math.random() * props.keyWords.length)];
+            props.keyWords.splice(props.keyWords.indexOf(word), 1);
             let arr = shortKeys;
             arr.push(word);
             setShortKeys(arr);
@@ -70,7 +69,8 @@ const Banner = (props) => {
             </div>
             {
                 (photographer !== '') &&
-                <p className={s.photographer}><a href={photographerUrl} target="_blank">{i18next.t('photographer')}{photographer}</a></p>
+                <p className={s.photographer}><a href={photographerUrl}
+                                                 target="_blank">{i18next.t('photographer')}{photographer}</a></p>
             }
             <img src={url} alt=""/>
         </div>

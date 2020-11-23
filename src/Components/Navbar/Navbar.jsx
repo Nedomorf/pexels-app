@@ -4,6 +4,7 @@ import SearchField from "../Common/SearchField/SearchField";
 import {NavLink} from "react-router-dom";
 import {MoreOutlined} from '@ant-design/icons';
 import {setPhotosAPI} from "../../api/api";
+import i18next from "i18next";
 
 const Navbar = (props) => {
 
@@ -38,14 +39,14 @@ const Navbar = (props) => {
                 </div>
             </NavLink>
             <div className={`${s.search} ${visiable && s.searchVisiable}`}>
-                <SearchField text={"Поиск бесплатных изображений"}/>
+                <SearchField text={i18next.t('navSearchPlaceholder')}/>
             </div>
             <div className={s.navs}>
-                <div className={s.navsElement}>Найти фото</div>
-                <div className={s.navsElement}>Коллекция</div>
-                <div className={s.navsElement}>Лицензия</div>
+                <div className={s.navsElement}>{i18next.t('findPhotoNav')}</div>
+                <div className={s.navsElement}>{i18next.t('collectionNav')}</div>
+                <div className={s.navsElement}>{i18next.t('licenceNav')}</div>
                 <MoreOutlined className={s.more}/>
-                <div className={s.btn} onClick={() => props.setLanguage('ru')}>Присоедениться</div>
+                <div className={s.btn} onClick={() => props.changeLanguage('ru')}>{i18next.t('joinNav')}</div>
             </div>
         </div>
     )

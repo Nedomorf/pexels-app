@@ -11,7 +11,8 @@
       "findPhotoNav": "Explore",
       "collectionNav": "Collection",
       "licenceNav": "Licence",
-      "joinNav": "Join"
+      "joinNav": "Join",
+      "navSearchPlaceholder": "Search for free photos"
 
     }
   }

@@ -63,9 +63,12 @@
     font-size: 18px;
     display: flex;
     position: relative;
-    height: 20px;
     align-items: center;
     justify-content: center;
+    height: 60%;
+    width: 40vw;
+    padding-left: 10px;
+    margin: 0 10px;
 }
 
 .navsElement {
@@ -73,10 +76,11 @@
     margin-right: 25px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .navsElement:nth-child(1) {
-    margin-left: 25px;
+    /*margin-left: 25px;*/
 }
 
 .more {
@@ -84,8 +88,6 @@
     margin-right: 25px;
     transform: rotate(90deg);
     transition: .05s linear;
-    position: absolute;
-    right: -55px;
 }
 
 .btn {
@@ -93,13 +95,13 @@
     border-radius: 4px;
     padding: 7px;
     width: 180px;
+    /*max-width: 10vw;*/
+    min-width: 12vw;
     height: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    right: -250px;
-    top: -10px;
+    transition: .1s ease;
 }
 
 .navsElement:hover {
@@ -125,10 +127,5 @@
     .navsElement {
         display: none;
     }
-    .btn {
-        right: -40vw;
-    }
-    .more {
-        right: -15vw;
-    }
 }
+

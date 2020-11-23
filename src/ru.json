@@ -11,7 +11,8 @@
       "findPhotoNav": "Найти фото",
       "collectionNav": "Коллекция",
       "licenceNav": "Лицензия",
-      "joinNav": "Присоедениться"
+      "joinNav": "Присоедениться",
+      "navSearchPlaceholder": "Поиск бесплатных изображений"
 
     }
   }
