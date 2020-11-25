@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import s from './Navbar.module.css';
 import SearchField from "../Common/SearchField/SearchField";
-import {NavLink} from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 import {MoreOutlined} from '@ant-design/icons';
 import {setPhotosAPI} from "../../api/api";
 import i18next from "i18next";
+import {compose} from "redux";
 
 const Navbar = (props) => {
 
@@ -16,7 +17,7 @@ const Navbar = (props) => {
     }
 
     return (
-        <div className={`${s.Navbar} ${visiable && s.NavVisiable}`}>
+        <div className={`${s.Navbar} ${(visiable || props.location.pathname.includes('/search')) && s.NavVisiable}`}>
             <NavLink
                 to='/'
                 className={s.logoContainer}
@@ -38,7 +39,7 @@ const Navbar = (props) => {
                     <p>Pexels</p>
                 </div>
             </NavLink>
-            <div className={`${s.search} ${visiable && s.searchVisiable}`}>
+            <div className={`${s.search} ${(visiable || props.location.pathname.includes('/search')) && s.searchVisiable}`}>
                 <SearchField text={i18next.t('navSearchPlaceholder')}/>
             </div>
             <div className={s.navs}>
@@ -52,4 +53,8 @@ const Navbar = (props) => {
     )
 }
 
-export default Navbar;
+export default compose(
+    withRouter
+)(Navbar);
+
+// export default Navbar;

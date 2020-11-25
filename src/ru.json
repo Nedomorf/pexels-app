@@ -12,7 +12,9 @@
       "collectionNav": "Коллекция",
       "licenceNav": "Лицензия",
       "joinNav": "Присоедениться",
-      "navSearchPlaceholder": "Поиск бесплатных изображений"
+      "navSearchPlaceholder": "Поиск бесплатных изображений",
+
+      "searchWord": "Фото На Тему "
 
     }
   }

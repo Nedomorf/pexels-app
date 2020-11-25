@@ -1,35 +1,56 @@
 import s from './Photo.module.css';
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
+import {createPortal} from 'react-dom';
 import {HeartTwoTone, HeartOutlined, PlusCircleOutlined, VerticalAlignBottomOutlined} from '@ant-design/icons';
-
-let likes = [];
 
 const Photo = (props) => {
 
-    const [like, setLike] = useState(false);
+    const download = e => {
+        e.preventDefault();
+        let url = props.downloadUrl;
+        fetch(url, {
+            method: "GET",
+            headers: {}
+        })
+            .then(response => {
+                response.arrayBuffer().then(function(buffer) {
+                    const file = window.URL.createObjectURL(new Blob([buffer]));
+                    const link = document.createElement("a");
+                    link.href = file;
+                    link.setAttribute("download", "image.jpeg");
+                    document.body.appendChild(link);
+                    link.click();
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    };
 
-    // useEffect(() => {
-    //     // setLike(props.isLiked);
-    //     let storageLikes = localStorage.getItem('likes');
-    //     likes = storageLikes.split(',');
-    //     // console.log('лайки:', likes)
-    //     // return () => {
-    //     //     alert('123')
-    //     //     localStorage.setItem('likes', likes)
-    //     // }
-    // }, [likes])
+    const [like, setLike] = useState(props.getStorage('likes').split(',').includes(String(props.photoId)));
 
-    const changeStorage = (liked) => {
-        setLike(liked);
-        console.log(like);
-        // liked
-        //     ? likes.push(props.photoId)
-        //     : likes.splice(likes.indexOf(props.photoId), 1)
-        // localStorage.setItem('likes', likes)
+    const changeLike = (isLiked, id) => {
+        setLike(isLiked);
+        let likes = props.getStorage('likes').split(',');
+        if (isLiked) {
+
+            likes.push(id)
+        } else {
+            likes = likes.filter(el => el !== String(id))
+        }
+        props.setStorage('likes', likes);
+        createPortal(<div style={{
+            position: `fixed`,
+            zIndex: `999`,
+            top: `300px`,
+            left: `300px`,
+            background: `red`
+        }}>123</div>, document.getElementById('app'))
+        // React.createPortal(<>123</>, document.getElementById('photo'))
     }
 
     return (
-        <div className={s.Photo}>
+        <div className={s.Photo} id="photo">
             <img
                 src={props.url}
                 alt=""
@@ -39,7 +60,7 @@ const Photo = (props) => {
                     {props.photographer}
                 </div>
                 <div>
-                    <a href={props.url} download="123.jpg">
+                    <a href={props.url} download onClick={e => download(e)}>
                         <VerticalAlignBottomOutlined style={{fontSize: `20px`}} className={s.addsElement}/>
                     </a>
                 </div>
@@ -48,11 +69,12 @@ const Photo = (props) => {
                 </div>
                 <div>
                     {
-                        likes.includes(props.photoId)
+                        props.getStorage('likes').split(',').includes(String(props.photoId))
+                        && !!like
                             ? <HeartTwoTone style={{fontSize: `20px`}} twoToneColor={'#FF0000'}
-                                            onClick={() => changeStorage(false)}/>
+                                            onClick={() => changeLike(false, props.photoId)}/>
                             : <HeartOutlined style={{fontSize: `20px`}} className={s.addsElement}
-                                             onClick={() => changeStorage(true)}/>
+                                             onClick={() => changeLike(true, props.photoId)}/>
                     }
                 </div>
             </div>

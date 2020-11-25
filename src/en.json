@@ -12,7 +12,9 @@
       "collectionNav": "Collection",
       "licenceNav": "Licence",
       "joinNav": "Join",
-      "navSearchPlaceholder": "Search for free photos"
+      "navSearchPlaceholder": "Search for free photos",
+
+      "searchWord": " Images"
 
     }
   }

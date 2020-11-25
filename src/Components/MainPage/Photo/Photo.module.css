@@ -32,7 +32,8 @@
     align-items: center;
     justify-content: center;
     color: white;
-    /*background: red;*/
+    /*outline: none;*/
+    /*text-decoration: none;*/
 }
 
 .photoAdds div:hover {

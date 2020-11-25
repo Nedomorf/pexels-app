@@ -11,12 +11,26 @@ const Banner = (props) => {
     const [photographer, setPhotographer] = useState('');
     const [photographerUrl, setPhotographerUrl] = useState('');
 
+    const keyWordsEn = [
+        'dogs', 'cats', 'coffee', 'summer', 'winter', 'autumn', 'spring', 'home', 'baby', 'cars', 'animals',
+        'people', 'woman', 'man', 'clothes', 'wedding', 'food', 'new year', 'christmas', 'easter', 'dress',
+        'forest', 'sea', 'ocean', 'beach', 'sun', 'space', 'moon', 'sky', 'night', 'grass', 'morning',
+        'love', 'glass', 'water', 'fire', 'air', 'earth', 'plants', 'planet', 'color', 'make up', 'light'
+    ];
+    const keyWordsRus = [
+        'собаки', 'коты', 'кофе', 'лето', 'зима', 'осень', 'весна', 'дом', 'ребенок', 'машины', 'животные',
+        'люди', 'женщина', 'мужчина', 'одежда', 'свадьба', 'еда', 'новый год', 'рождество', 'пасха', 'платье',
+        'лес', 'море', 'океан', 'пляж', 'солнце', 'космос', 'луна', 'небо', 'ночь', 'трава', 'утро',
+        'любовь', 'стекло', 'вода', 'огонь', 'воздух', 'земля', 'растения', 'планета', 'цвет', 'макияж', 'свет'
+    ];
+    const [keyWords, setKeyWords] = useState(keyWordsEn);
     const [shortKeys, setShortKeys] = useState([]);
 
     const getBannerPhoto = () => {
         props.setInitialize(false);
         let photoId = Math.random() * 9999999;
         photoId = Math.round(photoId);
+        // let photoId =  4553561
         getPhotoAPI(photoId, true).then(photo => {
             console.log(photo)
             if (photo.src) {
@@ -30,9 +44,16 @@ const Banner = (props) => {
 
     useEffect(() => {
         getBannerPhoto();
+        if (props.language === 'ru') {
+            setKeyWords(keyWordsRus);
+            console.log('changed')
+        } else if (props.language === 'en') {
+            setKeyWords(keyWordsEn);
+            console.log('changed')
+        }
         for (let i = 0; i < 7; i++) {
-            const word = props.keyWords[Math.floor(Math.random() * props.keyWords.length)];
-            props.keyWords.splice(props.keyWords.indexOf(word), 1);
+            const word = keyWords[Math.floor(Math.random() * keyWords.length)];
+            keyWords.splice(keyWords.indexOf(word), 1);
             let arr = shortKeys;
             arr.push(word);
             setShortKeys(arr);
@@ -69,8 +90,11 @@ const Banner = (props) => {
             </div>
             {
                 (photographer !== '') &&
-                <p className={s.photographer}><a href={photographerUrl}
-                                                 target="_blank">{i18next.t('photographer')}{photographer}</a></p>
+                <p className={s.photographer}>
+                    <a href={photographerUrl} target="_blank">{i18next.t('photographer')}
+                        {photographer}
+                    </a>
+                </p>
             }
             <img src={url} alt=""/>
         </div>
