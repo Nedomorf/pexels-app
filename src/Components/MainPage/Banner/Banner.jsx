@@ -11,20 +11,16 @@ const Banner = (props) => {
     const [photographer, setPhotographer] = useState('');
     const [photographerUrl, setPhotographerUrl] = useState('');
 
-    const keyWordsEn = [
-        'dogs', 'cats', 'coffee', 'summer', 'winter', 'autumn', 'spring', 'home', 'baby', 'cars', 'animals',
-        'people', 'woman', 'man', 'clothes', 'wedding', 'food', 'new year', 'christmas', 'easter', 'dress',
-        'forest', 'sea', 'ocean', 'beach', 'sun', 'space', 'moon', 'sky', 'night', 'grass', 'morning',
-        'love', 'glass', 'water', 'fire', 'air', 'earth', 'plants', 'planet', 'color', 'make up', 'light'
-    ];
-    const keyWordsRus = [
-        'собаки', 'коты', 'кофе', 'лето', 'зима', 'осень', 'весна', 'дом', 'ребенок', 'машины', 'животные',
-        'люди', 'женщина', 'мужчина', 'одежда', 'свадьба', 'еда', 'новый год', 'рождество', 'пасха', 'платье',
-        'лес', 'море', 'океан', 'пляж', 'солнце', 'космос', 'луна', 'небо', 'ночь', 'трава', 'утро',
-        'любовь', 'стекло', 'вода', 'огонь', 'воздух', 'земля', 'растения', 'планета', 'цвет', 'макияж', 'свет'
-    ];
-    const [keyWords, setKeyWords] = useState(keyWordsEn);
-    const [shortKeys, setShortKeys] = useState([]);
+    let words = [];
+    let str = '';
+    const createWord = () => {
+        str = props.keyWords[Math.floor(Math.random() * props.keyWords.length)];
+        if (words.includes(str)) {
+            createWord();
+        } else {
+            words.push(str);
+        }
+    }
 
     const getBannerPhoto = () => {
         props.setInitialize(false);
@@ -44,20 +40,6 @@ const Banner = (props) => {
 
     useEffect(() => {
         getBannerPhoto();
-        if (props.language === 'ru') {
-            setKeyWords(keyWordsRus);
-            console.log('changed')
-        } else if (props.language === 'en') {
-            setKeyWords(keyWordsEn);
-            console.log('changed')
-        }
-        for (let i = 0; i < 7; i++) {
-            const word = keyWords[Math.floor(Math.random() * keyWords.length)];
-            keyWords.splice(keyWords.indexOf(word), 1);
-            let arr = shortKeys;
-            arr.push(word);
-            setShortKeys(arr);
-        }
     }, [])
 
     return (
@@ -72,17 +54,22 @@ const Banner = (props) => {
                     {i18next.t('ideasText')}
                     {/*<p>кофе</p><span>,</span><p>шоколад</p><span>,</span><p>кошки</p>*/}
                     {
-                        shortKeys.map(word => {
-                            return (
-                                <NavLink className={s.keyWord} to={`/search/${word}`} onClick={() => {
-                                    setPhotosAPI(1, true, word).then(res => {
-                                        props.setPhotos(res.photos, true);
-                                        props.setPhotos(res.photos, false);
-                                    });
-                                }}>
-                                    <p>{word},</p>
-                                </NavLink>
-                            )
+                        props.keyWords.map((word, i) => {
+                            if (i === 0) words = [];
+                            words.push(word);
+                            if (i < 7) {
+                                (word !== undefined) && createWord();
+                                return (
+                                    <NavLink className={s.keyWord} to={`/search/${word}`} onClick={() => {
+                                        setPhotosAPI(1, true, str).then(res => {
+                                            props.setPhotos(res.photos, true);
+                                            props.setPhotos(res.photos, false);
+                                        });
+                                    }}>
+                                        <p>{str},</p>
+                                    </NavLink>
+                                )
+                            }
                         })
                     }
                     <NavLink className={s.keyWord} to='/search'><p>{i18next.t('moreIdeasText')}</p></NavLink>

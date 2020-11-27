@@ -25,7 +25,12 @@ const MainPageContainer = (props) => {
             <Route exact path="/">
                 <Banner {...props}/>
             </Route>
-            <Gallery {...props} setPhotosAPI={setPhotosAPI} page={page} setPage={setPage}/>
+            <Gallery
+                {...props}
+                setPhotosAPI={setPhotosAPI}
+                page={page}
+                setPage={setPage}
+            />
         </div>
     )
 }

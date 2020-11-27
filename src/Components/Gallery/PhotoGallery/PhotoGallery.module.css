@@ -7,7 +7,7 @@
 }
 
 .GalleryContainer h1 {
-    margin-top: 100px;
+    margin-top: 30px;
     margin-bottom: 30px;
 }
 
@@ -34,6 +34,17 @@
 .my-masonry-grid_column > div {
     background: grey;
     margin-bottom: 30px;
+}
+
+.photoLoader {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 48px;
+}
+
+.photoLoader object {
+    width: 100%;
 }
 
 @media screen and (max-width: 1070px) {

@@ -1,10 +1,10 @@
 .Navbar {
     background: none;
     height: 70px;
-    width: 100vw;
+    width: 100%;
     display: flex;
     align-items: center;
-    position: fixed;
+    position: sticky;
     z-index: 999;
     top: 0;
 }
@@ -77,6 +77,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    color: white;
 }
 
 .navsElement:nth-child(1) {

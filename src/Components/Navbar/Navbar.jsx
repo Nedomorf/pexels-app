@@ -68,7 +68,7 @@ const Navbar = (props) => {
                 <SearchField text={i18next.t('navSearchPlaceholder')}/>
             </div>
             <div className={s.navs}>
-                <div className={s.navsElement}>{i18next.t('findPhotoNav')}</div>
+                <NavLink to='/search' className={s.navsElement}>{i18next.t('findPhotoNav')}</NavLink>
                 <div className={s.navsElement}>{i18next.t('collectionNav')}</div>
                 <div className={s.navsElement}>{i18next.t('licenceNav')}</div>
                 <LightTooltip

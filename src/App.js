@@ -10,22 +10,21 @@ import {Redirect} from "react-router-dom";
 
 function App(props) {
 
-    // const keyWordsEn = [
-    //     'dogs', 'cats', 'coffee', 'summer', 'winter', 'autumn', 'spring', 'home', 'baby', 'cars', 'animals',
-    //     'people', 'woman', 'man', 'clothes', 'wedding', 'food', 'new year', 'christmas', 'easter', 'dress',
-    //     'forest', 'sea', 'ocean', 'beach', 'sun', 'space', 'moon', 'sky', 'night', 'grass', 'morning',
-    //     'love', 'glass', 'water', 'fire', 'air', 'earth', 'plants', 'planet', 'color', 'make up', 'light'
-    // ];
-    // const keyWordsRus = [
-    //     'собаки', 'коты', 'кофе', 'лето', 'зима', 'осень', 'весна', 'дом', 'ребенок', 'машины', 'животные',
-    //     'люди', 'женщина', 'мужчина', 'одежда', 'свадьба', 'еда', 'новый год', 'рождество', 'пасха', 'платье',
-    //     'лес', 'море', 'океан', 'пляж', 'солнце', 'космос', 'луна', 'небо', 'ночь', 'трава', 'утро',
-    //     'любовь', 'стекло', 'вода', 'огонь', 'воздух', 'земля', 'растения', 'планета', 'цвет', 'макияж', 'свет'
-    // ];
-    // let keyWords = [];
+    const keyWordsEn = [
+        'dogs', 'cats', 'coffee', 'summer', 'winter', 'autumn', 'spring', 'home', 'baby', 'cars', 'animals',
+        'people', 'woman', 'man', 'clothes', 'wedding', 'food', 'new year', 'christmas', 'easter', 'dress',
+        'forest', 'sea', 'ocean', 'beach', 'sun', 'space', 'moon', 'sky', 'night', 'grass', 'morning',
+        'love', 'glass', 'water', 'fire', 'air', 'earth', 'plants', 'planet', 'color', 'make up', 'light'
+    ];
+    const keyWordsRus = [
+        'собаки', 'коты', 'кофе', 'лето', 'зима', 'осень', 'весна', 'дом', 'ребенок', 'машины', 'животные',
+        'люди', 'женщина', 'мужчина', 'одежда', 'свадьба', 'еда', 'новый год', 'рождество', 'пасха', 'платье',
+        'лес', 'море', 'океан', 'пляж', 'солнце', 'космос', 'луна', 'небо', 'ночь', 'трава', 'утро',
+        'любовь', 'стекло', 'вода', 'огонь', 'воздух', 'земля', 'растения', 'планета', 'цвет', 'макияж', 'свет'
+    ];
 
     const [language, setLanguage] = useState('en');
-    // const [keyWords, setKeyWords] = useState(keyWordsEn);
+    const [keyWords, setKeyWords] = useState(keyWordsEn);
 
     useEffect(() => {
         changeLanguage(language);
@@ -36,26 +35,21 @@ function App(props) {
             lng: lang,
             resources: require(`/${lang}.json`)
         });
-        // wordsLanguage(lang);
         setLanguage(lang);
+        if (lang === 'ru') {
+            setKeyWords(keyWordsRus)
+        }else if (lang === 'en') {
+            setKeyWords(keyWordsEn)
+        }
     }
 
-    // const wordsLanguage = (lang) => {
-    //     if (lang === 'ru') {
-    //         keyWords = keyWordsRus;
-    //         debugger
-    //     } else if (lang === 'en') {
-    //         keyWords = keyWordsEn
-    //     }
-    // }
-    //
-    // wordsLanguage(language);
-
     return (
-        <div className={props.isInitialize && s.App} id="app">
+        <div className={props.isInitialize && s.App}>
+
             <Redirect from="/pexels-app" to="/"/>
-            <MainPageContainer language={language}/>
+
             {props.isInitialize && <Navbar setPhotos={props.setPhotos} changeLanguage={changeLanguage}/>}
+            <MainPageContainer keyWords={keyWords}/>
 
             {!props.isInitialize && <PageLoader/>}
         </div>
