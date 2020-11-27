@@ -1,13 +1,24 @@
 import React, {useState} from "react";
 import s from './Navbar.module.css';
+import './Navbar.css';
 import SearchField from "../Common/SearchField/SearchField";
 import {NavLink, withRouter} from "react-router-dom";
 import {MoreOutlined} from '@ant-design/icons';
 import {setPhotosAPI} from "../../api/api";
 import i18next from "i18next";
 import {compose} from "redux";
+import Tooltip from '@material-ui/core/Tooltip';
 
 const Navbar = (props) => {
+
+    const LangComp = () => {
+        return (
+            <div className={s.tooltip}>
+                <div onClick={() => props.changeLanguage('ru')}>🇷🇺 {i18next.t('rusLangNav')}</div>
+                <div onClick={() => props.changeLanguage('en')}>🇬🇧 {i18next.t('engLangNav')}</div>
+            </div>
+        )
+    }
 
     const [visiable, setVisiable] = useState(false);
 
@@ -39,15 +50,25 @@ const Navbar = (props) => {
                     <p>Pexels</p>
                 </div>
             </NavLink>
-            <div className={`${s.search} ${(visiable || props.location.pathname.includes('/search')) && s.searchVisiable}`}>
+            <div
+                className={`${s.search} ${(visiable || props.location.pathname.includes('/search')) && s.searchVisiable}`}>
                 <SearchField text={i18next.t('navSearchPlaceholder')}/>
             </div>
             <div className={s.navs}>
                 <div className={s.navsElement}>{i18next.t('findPhotoNav')}</div>
                 <div className={s.navsElement}>{i18next.t('collectionNav')}</div>
                 <div className={s.navsElement}>{i18next.t('licenceNav')}</div>
-                <MoreOutlined className={s.more}/>
-                <div className={s.btn} onClick={() => props.changeLanguage('ru')}>{i18next.t('joinNav')}</div>
+                <Tooltip
+                    title={<LangComp/>}
+                    arrow
+                    interactive
+                    leaveDelay={300}
+                    placement="bottom-end"
+                >
+                    <MoreOutlined className={s.more}/>
+                </Tooltip>
+
+                <div className={s.btn}>{i18next.t('joinNav')}</div>
             </div>
         </div>
     )

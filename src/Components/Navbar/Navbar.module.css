@@ -90,6 +90,17 @@
     transition: .05s linear;
 }
 
+.tooltip div {
+    margin: 5px 0 5px -10px;
+    padding: 5px;
+    width: calc(100% + 10px);
+}
+
+.tooltip div:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, .2);
+}
+
 .btn {
     background: #05a081;
     border-radius: 4px;
@@ -124,6 +135,7 @@
     .logo p {
         display: none;
     }
+
     .navsElement {
         display: none;
     }
