@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import s from './Navbar.module.css';
-import './Navbar.css';
 import SearchField from "../Common/SearchField/SearchField";
 import {NavLink, withRouter} from "react-router-dom";
 import {MoreOutlined} from '@ant-design/icons';
@@ -8,8 +7,22 @@ import {setPhotosAPI} from "../../api/api";
 import i18next from "i18next";
 import {compose} from "redux";
 import Tooltip from '@material-ui/core/Tooltip';
+import {withStyles} from "@material-ui/core";
 
 const Navbar = (props) => {
+
+    const LightTooltip = withStyles((theme) => ({
+        tooltip: {
+            backgroundColor: theme.palette.common.white,
+            color: `black`,
+            boxShadow: theme.shadows[1],
+            fontSize: 16,
+            width: `300px`
+        },
+        arrow: {
+            color: theme.palette.common.white
+        }
+    }))(Tooltip);
 
     const LangComp = () => {
         return (
@@ -58,15 +71,15 @@ const Navbar = (props) => {
                 <div className={s.navsElement}>{i18next.t('findPhotoNav')}</div>
                 <div className={s.navsElement}>{i18next.t('collectionNav')}</div>
                 <div className={s.navsElement}>{i18next.t('licenceNav')}</div>
-                <Tooltip
+                <LightTooltip
                     title={<LangComp/>}
                     arrow
                     interactive
-                    leaveDelay={300}
+                    leaveDelay={200}
                     placement="bottom-end"
                 >
                     <MoreOutlined className={s.more}/>
-                </Tooltip>
+                </LightTooltip>
 
                 <div className={s.btn}>{i18next.t('joinNav')}</div>
             </div>
