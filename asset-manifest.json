@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/pexels-app/static/css/main.87e572eb.chunk.css",
-    "main.js": "/pexels-app/static/js/main.37a672b6.chunk.js",
-    "main.js.map": "/pexels-app/static/js/main.37a672b6.chunk.js.map",
+    "main.js": "/pexels-app/static/js/main.3a2ce6b1.chunk.js",
+    "main.js.map": "/pexels-app/static/js/main.3a2ce6b1.chunk.js.map",
     "runtime-main.js": "/pexels-app/static/js/runtime-main.0e5a3bf5.js",
     "runtime-main.js.map": "/pexels-app/static/js/runtime-main.0e5a3bf5.js.map",
     "static/css/2.679831fc.chunk.css": "/pexels-app/static/css/2.679831fc.chunk.css",
@@ -22,6 +22,6 @@
     "static/css/2.679831fc.chunk.css",
     "static/js/2.5b2eff5f.chunk.js",
     "static/css/main.87e572eb.chunk.css",
-    "static/js/main.37a672b6.chunk.js"
+    "static/js/main.3a2ce6b1.chunk.js"
   ]
 }
