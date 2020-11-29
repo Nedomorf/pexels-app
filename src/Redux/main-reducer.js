@@ -1,9 +1,11 @@
 const SET_PHOTOS = "SET-PHOTOS";
 const SET_INITIALIZE = "SET-INITIALIZE";
+const SET_RECOMMENDS = "SET-RECOMMENDS";
 
 let initialState = {
     photos: [],
-    isInitialize: false
+    isInitialize: false,
+    recommends: []
 }
 
 let mainReducer = (state = initialState, action) => {
@@ -27,6 +29,14 @@ let mainReducer = (state = initialState, action) => {
                 ...state,
                 isInitialize: action.initialize
             };
+        case SET_RECOMMENDS:
+            let a = action.el
+            debugger
+            return {
+                ...state,
+                recommends: [...state.recommends, action.el]
+
+            }
         default:
             return state;
 
@@ -41,6 +51,11 @@ export const setPhotos = (photos, reset) => ({
 export const setInitialize = (initialize) => ({
     type: SET_INITIALIZE,
     initialize
+})
+
+export const setRecommends = (el) => ({
+    type: SET_RECOMMENDS,
+    el
 })
 
 export default mainReducer;

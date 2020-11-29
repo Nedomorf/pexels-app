@@ -23,7 +23,7 @@ function App(props) {
         'любовь', 'стекло', 'вода', 'огонь', 'воздух', 'земля', 'растения', 'планета', 'цвет', 'макияж', 'свет'
     ];
 
-    const [language, setLanguage] = useState('en');
+    const [language, setLanguage] = useState('ru');
     const [keyWords, setKeyWords] = useState(keyWordsEn);
 
     useEffect(() => {

@@ -11,7 +11,7 @@ const Gallery = (props) => {
         <div className="galleryComponent">
             {
                 (query === '')
-                    ? <RecommendsGallery keyWords={props.keyWords}/>
+                    ? <RecommendsGallery {...props}/>
                     : <PhotoGallery {...props}/>
             }
         </div>

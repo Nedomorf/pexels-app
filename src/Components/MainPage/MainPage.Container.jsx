@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {Route, withRouter} from "react-router-dom";
 import s from './MainPage.module.css';
 import {connect} from "react-redux";
-import {setInitialize, setPhotos} from "../../Redux/main-reducer";
+import {setInitialize, setPhotos, setRecommends} from "../../Redux/main-reducer";
 import {setPhotosAPI} from "../../api/api";
 import Banner from "./Banner/Banner";
 import {compose} from "redux";
@@ -13,7 +13,7 @@ const MainPageContainer = (props) => {
     const [page, setPage] = useState(1);
 
     useEffect(() => {
-        setPhotosAPI(page).then(res => {
+        setPhotosAPI(page, false, '').then(res => {
             console.log('useEffect', res);
             props.setPhotos(res.photos, false);
             props.setInitialize(true);
@@ -38,11 +38,12 @@ const MainPageContainer = (props) => {
 const mapStateToProps = (state) => {
     return {
         photos: state.Main.photos,
-        isInitialize: state.Main.isInitialize
+        isInitialize: state.Main.isInitialize,
+        recommends: state.Main.recommends
     }
 }
 
-const mapDispatchToProps = {setPhotos, setInitialize}
+const mapDispatchToProps = {setPhotos, setInitialize, setRecommends}
 
 
 export default compose(
