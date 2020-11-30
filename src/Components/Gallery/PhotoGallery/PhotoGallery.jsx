@@ -48,7 +48,7 @@ export const PhotoGallery = (props) => {
                             {`
                                 ${i18next.t('searchWord')}
                                 «${query[0].toUpperCase() + query.slice(1)}»
-                                `}
+                            `}
                         </h1>
                         :
                         <h1>
