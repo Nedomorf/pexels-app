@@ -33,6 +33,7 @@
     margin-bottom: 0;
     cursor: pointer;
     vertical-align: bottom;
+    text-transform: capitalize;
 }
 .md-radio label:before, .md-radio label:after {
     position: absolute;

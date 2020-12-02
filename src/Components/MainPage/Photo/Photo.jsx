@@ -24,22 +24,16 @@ const Photo = (props) => {
     const download = (e, size) => {
         e.preventDefault();
         setDisable(true);
-        let url = size;
-        if (size === props.url) {
-            let isChanged = false;
-            if (props.language === 'ru') {
-                i18next.changeLanguage('en').then(r => {
-                    console.log('language:', r);
-                    isChanged = true;
-                })
+        let url = '';
+        if (size !== props.downloadUrl) {
+            let lang = props.language;
+            if (lang !== 'en') {
+                i18next.changeLanguage('en');
             }
-            let requestSize = sizes(checked);
-            url = `props.url.${requestSize}`;
-            isChanged &&
-            i18next.changeLanguage('ru').then(r => {
-                console.log('language:', r);
-                isChanged = false;
-            })
+            let srcSize = i18next.t(sizes(checked))
+            url = props.url[srcSize];
+        } else {
+            url = props.downloadUrl;
         }
         fetch(url, {
             method: "GET",
@@ -161,9 +155,9 @@ const Photo = (props) => {
                         leaveDelay={200}
                         placement="bottom-end"
                     >
-                        <div onClick={e => download(e, props.url)}>
-                            Бесплатное скачивание<br/>
-                            {sizes(checked)}
+                        <div onClick={e => download(e, props.url)} style={{ display: `flex`, flexDirection: `column` }}>
+                            <p style={{ marginLeft: `-35%` }}>Бесплатное скачивание</p>
+                            <i style={{ marginLeft: `-35%`, marginTop: `5px`, textTransform: `capitalize` }}>{sizes(checked)}</i>
                             <div>
                                 <DownOutlined/>
                             </div>
