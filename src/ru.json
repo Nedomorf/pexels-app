@@ -16,7 +16,12 @@
       "rusLangNav": "Русский",
       "engLangNav": "Английский",
 
-      "searchWord": "Фото На Тему "
+      "searchWord": "Фото На Тему ",
+
+      "original": "Исходный",
+      "large": "Большой",
+      "medium": "Средний",
+      "small": "Маленький"
 
     }
   }

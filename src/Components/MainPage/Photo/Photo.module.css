@@ -54,6 +54,30 @@
     color: #ffffff;
 }
 
+.tooltip div {
+    margin: 0 -8px 0 -8px;
+    padding: 10px;
+    /*width: calc(100% + 6px);*/
+}
+
+.sizes div:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, .2);
+}
+
+.sizes div:nth-child(odd) {
+    border-bottom: 1px #bababa solid;
+    border-top: 1px #bababa solid;
+}
+
+.chooseCheckBox {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background: white;
+    border: 1px solid #bababa;
+}
+
 @media screen and (max-width: 850px) {
     .photoAdds {
         opacity: 1;

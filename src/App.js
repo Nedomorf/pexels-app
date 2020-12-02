@@ -1,12 +1,12 @@
 import s from './App.module.css';
 import React, {useEffect, useState} from "react";
 import Navbar from "./Components/Navbar/Navbar";
-import MainPageContainer from "./Components/MainPage/MainPage.Container";
+import MainPageContainer from "./Components/MainPage/MainPageContainer";
 import {connect} from "react-redux";
 import {PageLoader} from "./Components/Common/Loaders/PageLoader/PageLoader";
 import {setPhotos} from "./Redux/main-reducer";
 import i18next from "i18next";
-import {Redirect} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 
 function App(props) {
 
@@ -46,10 +46,10 @@ function App(props) {
     return (
         <div className={props.isInitialize && s.App}>
 
-            <Redirect from="/pexels-app" to="/"/>
+            {/*<Redirect from="/pexels-app" to="/"/>*/}
 
             {props.isInitialize && <Navbar setPhotos={props.setPhotos} changeLanguage={changeLanguage}/>}
-            <MainPageContainer keyWords={keyWords}/>
+            <MainPageContainer keyWords={keyWords} language={language}/>
 
             {!props.isInitialize && <PageLoader/>}
         </div>

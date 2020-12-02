@@ -61,9 +61,11 @@ const Banner = (props) => {
                                 (word !== undefined) && createWord();
                                 return (
                                     <NavLink className={s.keyWord} to={`/search/${str}`} onClick={() => {
+                                        props.setInitialize(false);
                                         setPhotosAPI(1, true, str).then(res => {
                                             props.setPhotos(res.photos, true);
                                             props.setPhotos(res.photos, false);
+                                            props.setInitialize(true);
                                         });
                                     }}>
                                         <p>{str},</p>

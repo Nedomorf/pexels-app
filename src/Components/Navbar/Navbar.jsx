@@ -69,7 +69,7 @@ const Navbar = (props) => {
             </div>
             <div className={s.navs}>
                 <NavLink to='/search' className={s.navsElement}>{i18next.t('findPhotoNav')}</NavLink>
-                <div className={s.navsElement}>{i18next.t('collectionNav')}</div>
+                <NavLink to='/collection' className={s.navsElement}>{i18next.t('collectionNav')}</NavLink>
                 <div className={s.navsElement}>{i18next.t('licenceNav')}</div>
                 <LightTooltip
                     title={<LangComp/>}

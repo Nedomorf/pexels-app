@@ -16,7 +16,12 @@
       "rusLangNav": "Russian",
       "engLangNav": "English",
 
-      "searchWord": " Images"
+      "searchWord": " Images",
+
+      "original": "Original",
+      "large": "Large",
+      "medium": "Medium",
+      "small": "Small"
 
     }
   }
