@@ -16,7 +16,8 @@ export const PhotoGallery = (props) => {
     useEffect(() => {
         if (props.history.location.pathname.includes('/search/') && props.query !== '/') {
             props.setPhotos([], true);
-            props.setPhotosAPI(props.page+1, true, props.query).then(res => {
+            props.setPage(1);
+            props.setPhotosAPI(1, true, props.query).then(res => {
                 setFetching(true);
                 console.log('search:', res);
                 props.setPhotos(res.photos, false);
@@ -67,38 +68,45 @@ export const PhotoGallery = (props) => {
                         </h1>
                 )
             }
-            <div className={s.gallery}>
-                <Masonry
-                    breakpointCols={breakpointColumnsObj}
-                    className={s.galleryGrid}
-                    columnClassName={s.galleryGridColumn}
-                >
-                    {
-                        props.photos.map((photo, index) => {
-                            const DIV = (
-                                <div key={index}>
-                                    < Photo
-                                        url={photo.src}
-                                        downloadUrl={photo.src.original}
-                                        isLiked={photo.liked}
-                                        photographer={photo.photographer}
-                                        photoId={photo.id}
-                                        photoLoader={photoLoader}
-                                        {...props}
-                                    />
-                                </div>
-                            )
-                            return (index === props.photos.length - 5)
-                                ? <Waypoint onEnter={onEnter}>{DIV}</Waypoint>
-                                : DIV
-                        })
-                    }
-                </Masonry>
-            </div>
             {
-                fetching && <div className={s.photoLoader}>
-                    <object type="image/svg+xml" data={photoLoader}>svg-animation</object>
-                </div>
+                props.photos[0]
+                    ?
+                    <>
+                        <div className={s.gallery}>
+                            <Masonry
+                                breakpointCols={breakpointColumnsObj}
+                                className={s.galleryGrid}
+                                columnClassName={s.galleryGridColumn}
+                            >
+                                {
+                                    props.photos.map((photo, index) => {
+                                        const DIV = (
+                                            <div key={index}>
+                                                < Photo
+                                                    url={photo.src}
+                                                    downloadUrl={photo.src.original}
+                                                    isLiked={photo.liked}
+                                                    photographer={photo.photographer}
+                                                    photoId={photo.id}
+                                                    photoLoader={photoLoader}
+                                                    {...props}
+                                                />
+                                            </div>
+                                        )
+                                        return (index === props.photos.length - 5)
+                                            ? <Waypoint onEnter={onEnter}>{DIV}</Waypoint>
+                                            : DIV
+                                    })
+                                }
+                            </Masonry>
+                        </div>
+                        {
+                            fetching && <div className={s.photoLoader}>
+                                <object type="image/svg+xml" data={photoLoader}>svg-animation</object>
+                            </div>
+                        }
+                    </>
+                    : fetching && <div className={s.noPhotos}>{i18next.t('noPhotos')}</div>
             }
         </div>
     )

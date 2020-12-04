@@ -25,6 +25,7 @@ function App(props) {
 
     const [language, setLanguage] = useState('ru');
     const [keyWords, setKeyWords] = useState(keyWordsEn);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         changeLanguage(language);
@@ -48,8 +49,8 @@ function App(props) {
 
             {/*<Redirect from="/pexels-app" to="/"/>*/}
 
-            {props.isInitialize && <Navbar setPhotos={props.setPhotos} changeLanguage={changeLanguage}/>}
-            <MainPageContainer keyWords={keyWords} language={language} changeLanguage={changeLanguage}/>
+            {props.isInitialize && <Navbar setPhotos={props.setPhotos} changeLanguage={changeLanguage} setPage={setPage}/>}
+            <MainPageContainer page={page} setPage={setPage} keyWords={keyWords} language={language} changeLanguage={changeLanguage}/>
 
             {!props.isInitialize && <PageLoader/>}
         </div>

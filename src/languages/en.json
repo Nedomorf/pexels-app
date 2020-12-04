@@ -23,7 +23,9 @@
       "medium": "medium",
       "small": "small",
       "collect": "Collect",
-      "download": "Free Download"
+      "download": "Free Download",
+
+      "noPhotos": "Nothing there!"
 
     }
   }

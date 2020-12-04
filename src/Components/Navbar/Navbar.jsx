@@ -41,19 +41,20 @@ const Navbar = (props) => {
         )
     }
 
-    const [visiable, setVisiable] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     window.onscroll = () => {
         let scrollTop = document.body.parentElement.scrollTop;
-        (scrollTop > 100) ? setVisiable(true) : setVisiable(false)
+        (scrollTop > 100) ? setVisible(true) : setVisible(false)
     }
 
     return (
-        <div className={`${s.Navbar} ${(visiable || props.location.pathname.includes('/search')) && s.NavVisiable}`}>
+        <div className={`${s.Navbar} ${(visible || props.location.pathname.includes('/search')) && s.NavVisible}`}>
             <NavLink
                 to='/'
                 className={s.logoContainer}
                 onClick={() => {
+                    props.setPage(1);
                     props.setPhotos([], true);
                     setPhotosAPI(1, false, '').then(res => {
                         props.setPhotos(res.photos, false);
@@ -72,7 +73,7 @@ const Navbar = (props) => {
                 </div>
             </NavLink>
             <div
-                className={`${s.search} ${(visiable || props.location.pathname.includes('/search')) && s.searchVisiable}`}>
+                className={`${s.search} ${(visible || props.location.pathname.includes('/search')) && s.searchVisiable}`}>
                 <SearchField text={i18next.t('navSearchPlaceholder')}/>
             </div>
             <div className={s.navs}>

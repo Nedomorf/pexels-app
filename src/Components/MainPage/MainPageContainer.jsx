@@ -10,10 +10,8 @@ import {compose} from "redux";
 
 const MainPageContainer = (props) => {
 
-    const [page, setPage] = useState(1);
-
     useEffect(() => {
-        setPhotosAPI(page, false, '').then(res => {
+        setPhotosAPI(props.page, false, '').then(res => {
             console.log('useEffect', res);
             props.setPhotos(res.photos, false);
             props.setInitialize(true);
@@ -28,8 +26,6 @@ const MainPageContainer = (props) => {
             <Gallery
                 {...props}
                 setPhotosAPI={setPhotosAPI}
-                page={page}
-                setPage={setPage}
             />
         </div>
     )
