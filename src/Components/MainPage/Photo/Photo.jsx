@@ -27,11 +27,13 @@ const Photo = (props) => {
         let url = '';
         if (size !== props.downloadUrl) {
             let lang = props.language;
+            debugger
             if (lang !== 'en') {
-                i18next.changeLanguage('en');
+                props.changeLanguage('en')
             }
             let srcSize = i18next.t(sizes(checked))
             url = props.url[srcSize];
+            props.changeLanguage(lang)
         } else {
             url = props.downloadUrl;
         }
@@ -155,9 +157,13 @@ const Photo = (props) => {
                         leaveDelay={200}
                         placement="bottom-end"
                     >
-                        <div onClick={e => download(e, props.url)} style={{ display: `flex`, flexDirection: `column` }}>
-                            <p style={{ marginLeft: `-35%` }}>Бесплатное скачивание</p>
-                            <i style={{ marginLeft: `-35%`, marginTop: `5px`, textTransform: `capitalize` }}>{sizes(checked)}</i>
+                        <div onClick={e => download(e, props.url)} style={{display: `flex`, flexDirection: `column`}}>
+                            <p style={{marginLeft: `-35%`}}>Бесплатное скачивание</p>
+                            <i style={{
+                                marginLeft: `-35%`,
+                                marginTop: `5px`,
+                                textTransform: `capitalize`
+                            }}>{sizes(checked)}</i>
                             <div>
                                 <DownOutlined/>
                             </div>

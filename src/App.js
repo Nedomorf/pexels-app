@@ -49,7 +49,7 @@ function App(props) {
             {/*<Redirect from="/pexels-app" to="/"/>*/}
 
             {props.isInitialize && <Navbar setPhotos={props.setPhotos} changeLanguage={changeLanguage}/>}
-            <MainPageContainer keyWords={keyWords} language={language}/>
+            <MainPageContainer keyWords={keyWords} language={language} changeLanguage={changeLanguage}/>
 
             {!props.isInitialize && <PageLoader/>}
         </div>

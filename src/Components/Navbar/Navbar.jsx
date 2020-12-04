@@ -29,6 +29,14 @@ const Navbar = (props) => {
             <div className={s.tooltip}>
                 <div onClick={() => props.changeLanguage('ru')}>🇷🇺 {i18next.t('rusLangNav')}</div>
                 <div onClick={() => props.changeLanguage('en')}>🇬🇧 {i18next.t('engLangNav')}</div>
+                {
+                    (window.innerWidth < 1260) &&
+                    <div>
+                        <NavLink to='/search' className={s.navsElement}>{i18next.t('findPhotoNav')}</NavLink>
+                        <NavLink to='/collection' className={s.navsElement}>{i18next.t('collectionNav')}</NavLink>
+                        <div className={s.navsElement}>{i18next.t('licenceNav')}</div>
+                    </div>
+                }
             </div>
         )
     }

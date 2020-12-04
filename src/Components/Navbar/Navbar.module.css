@@ -133,7 +133,7 @@
     transform: translateY(1px);
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1260px) {
     .logo p {
         display: none;
     }
