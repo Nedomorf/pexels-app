@@ -11,16 +11,21 @@ const Banner = (props) => {
     const [photographer, setPhotographer] = useState('');
     const [photographerUrl, setPhotographerUrl] = useState('');
 
-    let words = [];
-    let str = '';
-    const createWord = () => {
-        str = props.keyWords[Math.floor(Math.random() * props.keyWords.length)];
-        if (words.includes(str)) {
-            createWord();
-        } else {
-            words.push(str);
-        }
-    }
+    // let words = [];
+    // let str = '';
+    // let i = 0;
+    // const createWord = (count) => {
+    //     for (i; i < count; i++) {
+    //         str = props.keyWords[Math.floor(Math.random() * props.keyWords.length)];
+    //         if (words.includes(str)) {
+    //             createWord();
+    //         } else {
+    //             words.push(str);
+    //         }
+    //     }
+    //     i = 0;
+    //     props.setShortWords(words);
+    // }
 
     const getBannerPhoto = () => {
         props.setInitialize(false);
@@ -40,6 +45,7 @@ const Banner = (props) => {
 
     useEffect(() => {
         getBannerPhoto();
+        props.createWord(7, props.language);
     }, [])
 
     return (
@@ -51,30 +57,25 @@ const Banner = (props) => {
                     <SearchField text={i18next.t('bannerSearchPlaceholder')}/>
                 </div>
                 <div className={s.ideas}>
-                    {i18next.t('ideasText')}
+                    <span>{i18next.t('ideasText')}</span>
                     {/*<p>кофе</p><span>,</span><p>шоколад</p><span>,</span><p>кошки</p>*/}
                     {
-                        props.keyWords.map((word, i) => {
-                            if (i === 0) words = [];
-                            words.push(word);
-                            if (i < 7) {
-                                (word !== undefined) && createWord();
-                                return (
-                                    <NavLink className={s.keyWord} to={`/search/${str}`} onClick={() => {
-                                        props.setInitialize(false);
-                                        setPhotosAPI(1, true, str).then(res => {
-                                            props.setPhotos(res.photos, true);
-                                            props.setPhotos(res.photos, false);
-                                            props.setInitialize(true);
-                                        });
-                                    }}>
-                                        <p>{str},</p>
-                                    </NavLink>
-                                )
-                            }
+                        props.shortWords.map(word => {
+                            return (
+                                <NavLink className={s.keyWord} to={`/search/${word}`} onClick={() => {
+                                    props.setInitialize(false);
+                                    setPhotosAPI(1, true, word).then(res => {
+                                        props.setPhotos(res.photos, true);
+                                        props.setPhotos(res.photos, false);
+                                        props.setInitialize(true);
+                                    });
+                                }}>
+                                    <p>{word},</p>
+                                </NavLink>
+                            )
                         })
                     }
-                    <NavLink className={s.keyWord} to='/search'><p>{i18next.t('moreIdeasText')}</p></NavLink>
+                    <p className={s.keyWord}>{i18next.t('moreIdeasText')}</p>
                 </div>
             </div>
             {

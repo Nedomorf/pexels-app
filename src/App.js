@@ -24,12 +24,31 @@ function App(props) {
     ];
 
     const [language, setLanguage] = useState('ru');
-    const [keyWords, setKeyWords] = useState(keyWordsEn);
+    const [shortWords, setShortWords] = useState([]);
     const [page, setPage] = useState(1);
 
-    useEffect(() => {
-        changeLanguage(language);
-    }, [])
+    let words = [];
+    let str = '';
+    let i = 0;
+    let keysWords = [];
+    const createWord = (count, lang) => {
+        if (lang === 'ru') {
+            keysWords = keyWordsRus;
+        } else if (lang === 'en') {
+            keysWords = keyWordsEn;
+        }
+        for (i; i < count; i++) {
+            str = keysWords[Math.floor(Math.random() * keysWords.length)];
+            if (words.includes(str)) {
+                createWord(count, lang);
+            } else {
+                words.push(str);
+            }
+        }
+        setShortWords(words);
+        i = 0;
+        words = [];
+    }
 
     const changeLanguage = lang => {
         i18next.init({
@@ -37,20 +56,31 @@ function App(props) {
             resources: require(`./languages/${lang}.json`)
         });
         setLanguage(lang);
-        if (lang === 'ru') {
-            setKeyWords(keyWordsRus)
-        }else if (lang === 'en') {
-            setKeyWords(keyWordsEn)
-        }
+        createWord(7, lang);
     }
+
+    useEffect(() => {
+        changeLanguage(language);
+    }, [])
 
     return (
         <div className={props.isInitialize && s.App}>
 
             {/*<Redirect from="/pexels-app" to="/"/>*/}
 
-            {props.isInitialize && <Navbar setPhotos={props.setPhotos} changeLanguage={changeLanguage} setPage={setPage}/>}
-            <MainPageContainer page={page} setPage={setPage} keyWords={keyWords} language={language} changeLanguage={changeLanguage}/>
+            {
+                props.isInitialize &&
+                <Navbar setPhotos={props.setPhotos} changeLanguage={changeLanguage} setPage={setPage}/>
+            }
+
+            <MainPageContainer
+                page={page}
+                setPage={setPage}
+                shortWords={shortWords}
+                createWord={createWord}
+                language={language}
+                changeLanguage={changeLanguage}
+            />
 
             {!props.isInitialize && <PageLoader/>}
         </div>
