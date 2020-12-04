@@ -19,7 +19,10 @@ const Photo = (props) => {
     const [like, setLike] = useState(props.getStorage('likes').split(',').includes(String(props.photoId)));
     const [disable, setDisable] = useState(false);
     const [inCollection, setInCollection] = useState(props.getStorage('collection').split(',').includes(String(props.photoId)));
+    const [checked, setChecked] = useState(1);
     const [open, setOpen] = useState(false);
+    const [bg, setBg] = useState('#05a081')
+
 
     const download = (e, size) => {
         e.preventDefault();
@@ -27,13 +30,12 @@ const Photo = (props) => {
         let url = '';
         if (size !== props.downloadUrl) {
             let lang = props.language;
-            debugger
             if (lang !== 'en') {
                 props.changeLanguage('en')
             }
             let srcSize = i18next.t(sizes(checked))
             url = props.url[srcSize];
-            props.changeLanguage(lang)
+            props.changeLanguage(lang);
         } else {
             url = props.downloadUrl;
         }
@@ -81,6 +83,7 @@ const Photo = (props) => {
 
     const [body, setBody] = useState();
     const changeModalState = (opening) => {
+        setChecked(1);
         setOpen(opening);
         opening
             ? body.style.overflowY = 'hidden'
@@ -100,8 +103,6 @@ const Photo = (props) => {
             width: `300px`
         }
     }))(Tooltip);
-
-    const [checked, setChecked] = useState(1);
 
     const sizes = (id) => {
         switch (id) {
@@ -125,23 +126,49 @@ const Photo = (props) => {
                 <div className={s.sizes}>
                     {
                         Array.from([1, 2, 3, 4]).map(id => {
+                            // let h = '';
+                            // let w = '';
+                            // for (let i = 0; i < props.photos.length; i++) {
+                            //     if (props.photos[i].id === props.id) {
+                            //         h = props.photos[i].height;
+                            //         w = props.photos[i].width;
+                            //     }
+                            // }
                             return (
-                                <RadioButton
-                                    text={sizes(id)}
-                                    id={id}
-                                    isChecked={checked}
-                                    setChecked={setChecked}
-                                />
+                                <div onClick={() => {
+                                    setChecked(id);
+                                    setBg('#05a081');
+                                }}>
+                                    <RadioButton
+                                        text={sizes(id)}
+                                        id={id}
+                                        isChecked={checked}
+                                    />
+                                    {/*<span>({h}X{w})</span>*/}
+                                </div>
                             )
                         })
                     }
-                    {/*<div className={s.chooseElement}>*/}
-                    {/*    Маленький*/}
-                    {/*</div>*/}
                 </div>
             </div>
         )
     }
+
+    let tooltipBtnStyles = {
+        position: `fixed`,
+        right: `150px`,
+        width: `25px`,
+        height: `50px`,
+        borderLeft: `1px solid #565656`,
+        borderRadius: `0 5px 5px 0`,
+        display: `flex`,
+        alignItems: `center`,
+        justifyContent: `center`,
+        color: `white`,
+        background: bg
+    }
+
+    const toggleHover = isOpen => isOpen ? setBg('#06B995') : setBg('#05a081')
 
     return (
         <div>
@@ -149,26 +176,42 @@ const Photo = (props) => {
                 <div>
                     {props.photographer}
                     <div>
-                        <PlusCircleOutlined/> В коллекцию
+                        <PlusCircleOutlined/>
+                        {i18next.t('collect')}
                     </div>
-                    <LightTooltip
-                        title={<SizeComp/>}
-                        interactive
-                        leaveDelay={200}
-                        placement="bottom-end"
-                    >
-                        <div onClick={e => download(e, props.url)} style={{display: `flex`, flexDirection: `column`}}>
-                            <p style={{marginLeft: `-35%`}}>Бесплатное скачивание</p>
-                            <i style={{
-                                marginLeft: `-35%`,
-                                marginTop: `5px`,
-                                textTransform: `capitalize`
-                            }}>{sizes(checked)}</i>
-                            <div>
-                                <DownOutlined/>
-                            </div>
-                        </div>
-                    </LightTooltip>
+                    {
+                        !disable
+                            ?
+                            <>
+                                <div onClick={e => download(e, props.url)}
+                                     style={{display: `flex`, flexDirection: `column`}}>
+                                    <p style={{marginLeft: `-35%`}}>{i18next.t('download')}</p>
+                                    <i style={{
+                                        marginLeft: `-35%`,
+                                        marginTop: `5px`,
+                                        textTransform: `capitalize`
+                                    }}>{sizes(checked)}</i>
+                                </div>
+                                <LightTooltip
+                                    title={<SizeComp/>}
+                                    interactive
+                                    leaveDelay={200}
+                                    placement="bottom-end"
+                                    disableFocusListener
+                                    onOpen={() => toggleHover(true)}
+                                    onClose={() => toggleHover(false)}
+                                >
+                                    <div style={tooltipBtnStyles}>
+                                        <DownOutlined style={{marginRight: `25px`}}/>
+                                    </div>
+                                </LightTooltip>
+                            </>
+                            :
+                            <object type="image/svg+xml" data={props.photoLoader}
+                                    style={{position: `fixed`, right: `150px`}}>
+                                svg-animation
+                            </object>
+                    }
                 </div>
                 <img
                     src={props.url.large}

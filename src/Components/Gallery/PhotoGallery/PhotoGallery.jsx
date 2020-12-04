@@ -83,10 +83,8 @@ export const PhotoGallery = (props) => {
                                         isLiked={photo.liked}
                                         photographer={photo.photographer}
                                         photoId={photo.id}
-                                        getStorage={props.getStorage}
-                                        setStorage={props.setStorage}
-                                        changeLanguage={props.changeLanguage}
-                                        language={props.language}
+                                        photoLoader={photoLoader}
+                                        {...props}
                                     />
                                 </div>
                             )

@@ -33,7 +33,7 @@ function App(props) {
     const changeLanguage = lang => {
         i18next.init({
             lng: lang,
-            resources: require(`/${lang}.json`)
+            resources: require(`./languages/${lang}.json`)
         });
         setLanguage(lang);
         if (lang === 'ru') {

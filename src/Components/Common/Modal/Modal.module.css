@@ -94,14 +94,14 @@ body.Modal {
     cursor: pointer;
 }
 
-.modalContent div div:nth-child(2) div {
-    border-left: 1px solid #565656;
-    width: 40px;
-    height: 50px;
-    padding-left: 20px;
-    position: fixed;
-    right: 150px;
-}
+/*.modalContent div div:nth-child(2) div {*/
+/*    border-left: 1px solid #565656;*/
+/*    width: 40px;*/
+/*    height: 50px;*/
+/*    padding-left: 20px;*/
+/*    position: fixed;*/
+/*    right: 150px;*/
+/*}*/
 
 .modalContent div div:nth-child(2) div:hover {
     background: #06B995;
