@@ -14,6 +14,7 @@ export const PhotoGallery = (props) => {
     // let query = props.history.location.pathname.replace('/search/', '');
 
     useEffect(() => {
+        props.body.style.overflowY = 'visible';
         if (props.history.location.pathname.includes('/search/') && props.query !== '/') {
             props.setPhotos([], true);
             props.setPage(1);

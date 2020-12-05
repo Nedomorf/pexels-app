@@ -80,7 +80,19 @@
 }
 
 @media screen and (max-width: 850px) {
-    .Banner span {
+    .ideas span {
         display: none;
+    }
+    .photographer {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .Banner {
+        height: 80vh;
+    }
+    .bannerContent h1 {
+        margin-top: 10vh;
     }
 }

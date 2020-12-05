@@ -26,6 +26,7 @@ function App(props) {
     const [language, setLanguage] = useState('ru');
     const [shortWords, setShortWords] = useState([]);
     const [page, setPage] = useState(1);
+    const [body, setBody] = useState();
 
     let words = [];
     let str = '';
@@ -61,6 +62,7 @@ function App(props) {
 
     useEffect(() => {
         changeLanguage(language);
+        setBody(document.querySelector('body'));
     }, [])
 
     return (
@@ -70,7 +72,7 @@ function App(props) {
 
             {
                 props.isInitialize &&
-                <Navbar setPhotos={props.setPhotos} changeLanguage={changeLanguage} setPage={setPage}/>
+                <Navbar setPhotos={props.setPhotos} changeLanguage={changeLanguage} setPage={setPage} body={body}/>
             }
 
             <MainPageContainer
@@ -80,6 +82,7 @@ function App(props) {
                 createWord={createWord}
                 language={language}
                 changeLanguage={changeLanguage}
+                body={body}
             />
 
             {!props.isInitialize && <PageLoader/>}

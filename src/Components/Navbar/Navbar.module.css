@@ -64,9 +64,9 @@
     display: flex;
     position: relative;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     height: 60%;
-    width: 40vw;
+    width: auto;
     padding-left: 10px;
     margin: 0 10px;
 }
@@ -81,10 +81,6 @@
     color: white;
 }
 
-.navsElement:nth-child(1) {
-    /*margin-left: 25px;*/
-}
-
 .more {
     font-size: 32px;
     margin-right: 25px;
@@ -95,7 +91,6 @@
 .tooltip div {
     margin: 5px -8px 5px -8px;
     padding: 10px;
-    /*width: calc(100% + 6px);*/
 }
 
 .tooltip div:hover {
@@ -133,6 +128,51 @@
     transform: translateY(1px);
 }
 
+.hamburgerMenu {
+    display: none;
+}
+
+.menuBody {
+    position: fixed;
+    top: 70px;
+    width: 100%;
+    height: calc(100% - 70px);
+    background: rgb(35, 42, 52);
+}
+
+.menuElement {
+    position: relative;
+    font-size: 24px;
+    color: rgb(192, 195, 196);
+    margin: 10px 10px 10px 15px;
+    transition: color .1s ease;
+}
+
+.menuElement:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.menuElement:hover .navPop {
+    left: -40px;
+}
+
+.navPop {
+    background: white;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: -60px;
+    top: 0;
+    border-radius: 10px;
+    transition: left .1s ease;
+}
+
+.navBlock {
+    padding: 20px 0;
+    border-bottom: 1px #7b7d7e solid;
+}
+
 @media screen and (max-width: 1260px) {
     .logo p {
         display: none;
@@ -140,6 +180,29 @@
 
     .navsElement {
         display: none;
+    }
+
+    .search {
+        width: 70vw;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .more {
+        display: none;
+    }
+
+    .btn {
+        display: none;
+    }
+
+    .search {
+        width: 90vw;
+    }
+
+    .hamburgerMenu {
+        display: block;
+        margin-right: 10px;
     }
 }
 

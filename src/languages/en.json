@@ -8,6 +8,7 @@
       "photographer": "Photo by ",
       "bannerSearchPlaceholder": "Search for free photos and videos",
 
+      "mainNav": "Home",
       "findPhotoNav": "Explore",
       "collectionNav": "Collection",
       "licenceNav": "Licence",
@@ -18,6 +19,7 @@
 
       "searchWord": " Images",
 
+      "chooseSize": "Choose a size:",
       "original": "original",
       "large": "large",
       "medium": "medium",

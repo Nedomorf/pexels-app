@@ -11,22 +11,6 @@ const Banner = (props) => {
     const [photographer, setPhotographer] = useState('');
     const [photographerUrl, setPhotographerUrl] = useState('');
 
-    // let words = [];
-    // let str = '';
-    // let i = 0;
-    // const createWord = (count) => {
-    //     for (i; i < count; i++) {
-    //         str = props.keyWords[Math.floor(Math.random() * props.keyWords.length)];
-    //         if (words.includes(str)) {
-    //             createWord();
-    //         } else {
-    //             words.push(str);
-    //         }
-    //     }
-    //     i = 0;
-    //     props.setShortWords(words);
-    // }
-
     const getBannerPhoto = () => {
         props.setInitialize(false);
         let photoId = Math.random() * 9999999;

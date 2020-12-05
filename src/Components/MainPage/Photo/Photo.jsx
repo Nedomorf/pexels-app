@@ -5,7 +5,7 @@ import {
     HeartOutlined,
     PlusCircleOutlined,
     VerticalAlignBottomOutlined,
-    CheckCircleOutlined, DownOutlined, MoreOutlined
+    CheckCircleOutlined, DownOutlined, MoreOutlined, CloseOutlined
 } from '@ant-design/icons';
 import Loader from '../../Common/Loaders/loader.svg';
 import Modal from "../../Common/Modal/Modal";
@@ -21,7 +21,8 @@ const Photo = (props) => {
     const [inCollection, setInCollection] = useState(props.getStorage('collection').split(',').includes(String(props.photoId)));
     const [checked, setChecked] = useState(1);
     const [open, setOpen] = useState(false);
-    const [bg, setBg] = useState('#05a081')
+    const [bg, setBg] = useState('#05a081');
+    const [toRight, setToRight] = useState('150px');
 
 
     const download = (e, size) => {
@@ -81,17 +82,16 @@ const Photo = (props) => {
         props.setStorage('collection', collection);
     }
 
-    const [body, setBody] = useState();
     const changeModalState = (opening) => {
         setChecked(1);
         setOpen(opening);
         opening
-            ? body.style.overflowY = 'hidden'
-            : body.style.overflowY = 'visible'
+            ? props.body.style.overflowY = 'hidden'
+            : props.body.style.overflowY = 'visible'
     }
 
     useEffect(() => {
-        setBody(document.querySelector('body'));
+
     }, []);
 
     const LightTooltip = withStyles((theme) => ({
@@ -121,7 +121,7 @@ const Photo = (props) => {
         return (
             <div className={s.tooltip}>
                 <div className={s.chooseSize}>
-                    Выберите размер:
+                    {i18next.t('chooseSize')}
                 </div>
                 <div className={s.sizes}>
                     {
@@ -156,7 +156,7 @@ const Photo = (props) => {
 
     let tooltipBtnStyles = {
         position: `fixed`,
-        right: `150px`,
+        right: toRight,
         width: `25px`,
         height: `50px`,
         borderLeft: `1px solid #565656`,
@@ -168,50 +168,67 @@ const Photo = (props) => {
         background: bg
     }
 
-    const toggleHover = isOpen => isOpen ? setBg('#06B995') : setBg('#05a081')
+    const toggleHover = isOpen => isOpen ? setBg('#06B995') : setBg('#05a081');
+
+    const clientWidth = document.body.clientWidth;
+
+    useEffect(() => {
+        (clientWidth < 1050) ? setToRight('10px') : setToRight('150px');
+    }, [])
 
     return (
         <div>
             <Modal open={open} onClose={() => changeModalState(false)}>
-                <div>
+                {
+                    (clientWidth < 1050) &&
+                    <span style={{position: `fixed`, left: 3, top: 3, height: `20px`, fontSize: 20, zIndex: 1000}}>
+                        <CloseOutlined style={{color: `black`}} onClick={() => changeModalState(false)}/>
+                    </span>
+                }
+                <div style={{display: `flex`, flexWrap: `wrap`}}>
+                    {
+                        (clientWidth < 1050)
+                    }
                     {props.photographer}
                     <div>
-                        <PlusCircleOutlined/>
-                        {i18next.t('collect')}
-                    </div>
-                    {
-                        !disable
-                            ?
-                            <>
-                                <div onClick={e => download(e, props.url)}
-                                     style={{display: `flex`, flexDirection: `column`}}>
-                                    <p style={{marginLeft: `-35%`}}>{i18next.t('download')}</p>
-                                    <i style={{
-                                        marginLeft: `-35%`,
-                                        marginTop: `5px`,
-                                        textTransform: `capitalize`
-                                    }}>{sizes(checked)}</i>
-                                </div>
-                                <LightTooltip
-                                    title={<SizeComp/>}
-                                    interactive
-                                    leaveDelay={200}
-                                    placement="bottom-end"
-                                    disableFocusListener
-                                    onOpen={() => toggleHover(true)}
-                                    onClose={() => toggleHover(false)}
-                                >
-                                    <div style={tooltipBtnStyles}>
-                                        <DownOutlined style={{marginRight: `25px`}}/>
+                        <div>
+                            <PlusCircleOutlined/>
+                            {i18next.t('collect')}
+                        </div>
+                        {
+                            !disable
+                                ?
+                                <>
+                                    <div onClick={e => download(e, props.url)}
+                                         style={{display: `flex`, flexDirection: `column`}}>
+                                        <p style={{marginLeft: `-35%`}}>{i18next.t('download')}</p>
+                                        <i style={{
+                                            marginLeft: `-35%`,
+                                            marginTop: `5px`,
+                                            textTransform: `capitalize`
+                                        }}>{sizes(checked)}</i>
                                     </div>
-                                </LightTooltip>
-                            </>
-                            :
-                            <object type="image/svg+xml" data={props.photoLoader}
-                                    style={{position: `fixed`, right: `150px`}}>
-                                svg-animation
-                            </object>
-                    }
+                                    <LightTooltip
+                                        title={<SizeComp/>}
+                                        interactive
+                                        leaveDelay={200}
+                                        placement="bottom-end"
+                                        disableFocusListener
+                                        onOpen={() => toggleHover(true)}
+                                        onClose={() => toggleHover(false)}
+                                    >
+                                        <div style={tooltipBtnStyles}>
+                                            <DownOutlined style={{marginRight: `25px`}}/>
+                                        </div>
+                                    </LightTooltip>
+                                </>
+                                :
+                                <object type="image/svg+xml" data={props.photoLoader}
+                                        style={{position: `fixed`, right: `150px`}}>
+                                    svg-animation
+                                </object>
+                        }
+                    </div>
                 </div>
                 <img
                     src={props.url.large}
