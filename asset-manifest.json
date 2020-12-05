@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/pexels-app/static/css/main.4ace9133.chunk.css",
-    "main.js": "/pexels-app/static/js/main.5bafb394.chunk.js",
-    "main.js.map": "/pexels-app/static/js/main.5bafb394.chunk.js.map",
+    "main.css": "/pexels-app/static/css/main.beaf51f6.chunk.css",
+    "main.js": "/pexels-app/static/js/main.cdeefea9.chunk.js",
+    "main.js.map": "/pexels-app/static/js/main.cdeefea9.chunk.js.map",
     "runtime-main.js": "/pexels-app/static/js/runtime-main.b84ce63c.js",
     "runtime-main.js.map": "/pexels-app/static/js/runtime-main.b84ce63c.js.map",
     "static/css/2.679831fc.chunk.css": "/pexels-app/static/css/2.679831fc.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.53711e60.chunk.js.map": "/pexels-app/static/js/3.53711e60.chunk.js.map",
     "index.html": "/pexels-app/index.html",
     "static/css/2.679831fc.chunk.css.map": "/pexels-app/static/css/2.679831fc.chunk.css.map",
-    "static/css/main.4ace9133.chunk.css.map": "/pexels-app/static/css/main.4ace9133.chunk.css.map",
+    "static/css/main.beaf51f6.chunk.css.map": "/pexels-app/static/css/main.beaf51f6.chunk.css.map",
     "static/js/2.5944890e.chunk.js.LICENSE.txt": "/pexels-app/static/js/2.5944890e.chunk.js.LICENSE.txt",
     "static/media/gb-flag.4be13176.svg": "/pexels-app/static/media/gb-flag.4be13176.svg",
     "static/media/loader.924d4133.svg": "/pexels-app/static/media/loader.924d4133.svg",
@@ -23,7 +23,7 @@
     "static/js/runtime-main.b84ce63c.js",
     "static/css/2.679831fc.chunk.css",
     "static/js/2.5944890e.chunk.js",
-    "static/css/main.4ace9133.chunk.css",
-    "static/js/main.5bafb394.chunk.js"
+    "static/css/main.beaf51f6.chunk.css",
+    "static/js/main.cdeefea9.chunk.js"
   ]
 }
