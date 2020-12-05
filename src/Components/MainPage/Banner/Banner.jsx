@@ -41,9 +41,9 @@ const Banner = (props) => {
                 <div className={s.ideas}>
                     <span>{i18next.t('ideasText')}</span>
                     {
-                        props.shortWords.map(word => {
+                        props.shortWords.map((word, index) => {
                             return (
-                                <NavLink className={s.keyWord} to={`/search/${word}`} onClick={() => {
+                                <NavLink key={index} className={s.keyWord} to={`/search/${word}`} onClick={() => {
                                     props.setInitialize(false);
                                     props.setPhotosAPI(1, true, word).then(res => {
                                         props.setPhotos(res.photos, true);

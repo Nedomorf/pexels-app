@@ -90,7 +90,7 @@ const Navbar = (props) => {
     return (
         <div className={`${s.Navbar} ${(
             visible || props.location.pathname.includes('/search') || props.location.pathname === '/collection'
-        ) && s.NavVisible}`}>
+        ) ? s.NavVisible : undefined}`}>
             <NavLink
                 to='/'
                 className={s.logoContainer}
@@ -118,7 +118,7 @@ const Navbar = (props) => {
                 ${s.search} 
                 ${(
                     visible || props.location.pathname.includes('/search') || props.location.pathname === '/collection'
-                ) && s.searchVisiable}
+                ) ? s.searchVisible : undefined}
                 `}>
                 <SearchField text={i18next.t('navSearchPlaceholder')}/>
             </div>

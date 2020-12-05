@@ -55,7 +55,7 @@ export const Gallery = (props) => {
                                             </div>
                                         )
                                         return (index === props.photos.length - 5)
-                                            ? <Waypoint onEnter={props.onEnter}>{DIV}</Waypoint>
+                                            ? <Waypoint onEnter={props.onEnter} key={index}>{DIV}</Waypoint>
                                             : DIV
                                     })
                                 }
