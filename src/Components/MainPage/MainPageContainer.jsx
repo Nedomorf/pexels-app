@@ -11,6 +11,7 @@ import {compose} from "redux";
 const MainPageContainer = (props) => {
 
     useEffect(() => {
+        props.setInitialize(false);
         setPhotosAPI(props.page, false, '').then(res => {
             console.log('useEffect', res);
             props.setPhotos(res.photos, false);

@@ -24,7 +24,8 @@
       "large": "large",
       "medium": "medium",
       "small": "small",
-      "collect": "Collect",
+      "collect-false": "Collect",
+      "collect-true": "Added",
       "download": "Free Download",
 
       "noPhotos": "Nothing here!"

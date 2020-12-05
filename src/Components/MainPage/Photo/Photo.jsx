@@ -13,6 +13,8 @@ import {withStyles} from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
 import i18next from "i18next";
 import {RadioButton} from "../../Common/RadioButton/RadioButton";
+import {setPhotosAPI} from "../../../api/api";
+import {NavLink} from "react-router-dom";
 
 const Photo = (props) => {
 
@@ -80,6 +82,7 @@ const Photo = (props) => {
             collection = collection.filter(el => el !== String(id));
         }
         props.setStorage('collection', collection);
+        // props.setPhotos(collection, false);
     }
 
     const changeModalState = (opening) => {
@@ -191,9 +194,12 @@ const Photo = (props) => {
                     }
                     {props.photographer}
                     <div>
-                        <div>
-                            <PlusCircleOutlined/>
-                            {i18next.t('collect')}
+                        <div onClick={() => changeCollection(!inCollection, props.photoId)}>
+                            {
+                                props.getStorage('collection').split(',').includes(String(props.photoId))
+                                && !!inCollection ? <CheckCircleOutlined/> : <PlusCircleOutlined/>
+                            }
+                            {i18next.t(`collect-${inCollection}`)}
                         </div>
                         {
                             !disable

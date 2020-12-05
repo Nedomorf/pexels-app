@@ -63,7 +63,12 @@ function App(props) {
     useEffect(() => {
         changeLanguage(language);
         setBody(document.querySelector('body'));
+        !getStorage('likes') && setStorage('likes', '');
+        !getStorage('collection') && setStorage('collection', '');
     }, [])
+
+    const getStorage = key => localStorage.getItem(key);
+    const setStorage = (key, value) => localStorage.setItem(key, value);
 
     return (
         <div className={props.isInitialize && s.App}>
@@ -72,7 +77,14 @@ function App(props) {
 
             {
                 props.isInitialize &&
-                <Navbar setPhotos={props.setPhotos} changeLanguage={changeLanguage} setPage={setPage} body={body}/>
+                <Navbar
+                    setPhotos={props.setPhotos}
+                    changeLanguage={changeLanguage}
+                    setPage={setPage}
+                    body={body}
+                    getStorage={getStorage}
+                    setStorage={setStorage}
+                />
             }
 
             <MainPageContainer
@@ -83,6 +95,8 @@ function App(props) {
                 language={language}
                 changeLanguage={changeLanguage}
                 body={body}
+                getStorage={getStorage}
+                setStorage={setStorage}
             />
 
             {!props.isInitialize && <PageLoader/>}

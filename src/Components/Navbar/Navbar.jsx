@@ -3,7 +3,7 @@ import s from './Navbar.module.css';
 import SearchField from "../Common/SearchField/SearchField";
 import {NavLink, withRouter} from "react-router-dom";
 import {MenuOutlined, MoreOutlined} from '@ant-design/icons';
-import {setPhotosAPI} from "../../api/api";
+import {getPhotoAPI, setPhotosAPI} from "../../api/api";
 import i18next from "i18next";
 import {compose} from "redux";
 import Tooltip from '@material-ui/core/Tooltip';
@@ -51,6 +51,7 @@ const Navbar = (props) => {
 
     window.onscroll = () => {
         let scrollTop = document.body.parentElement.scrollTop;
+        // (!props.location.pathname.includes('/search') || props.history.location.pathname !== '/collection') &&
         (scrollTop > 100) ? setVisible(true) : setVisible(false)
     }
 
@@ -67,7 +68,9 @@ const Navbar = (props) => {
     const toggleHover = isHover => isHover ? setColor('white') : setColor('rgb(192, 195, 196)')
 
     return (
-        <div className={`${s.Navbar} ${(visible || props.location.pathname.includes('/search')) && s.NavVisible}`}>
+        <div className={`${s.Navbar} ${(
+            visible || props.location.pathname.includes('/search') || props.location.pathname === '/collection'
+            ) && s.NavVisible}`}>
             <NavLink
                 to='/'
                 className={s.logoContainer}
@@ -91,12 +94,32 @@ const Navbar = (props) => {
                 </div>
             </NavLink>
             <div
-                className={`${s.search} ${(visible || props.location.pathname.includes('/search')) && s.searchVisiable}`}>
+                className={`
+                ${s.search} 
+                ${(
+                    visible || props.location.pathname.includes('/search') || props.location.pathname === '/collection'
+                    ) && s.searchVisiable}
+                `}>
                 <SearchField text={i18next.t('navSearchPlaceholder')}/>
             </div>
             <div className={s.navs}>
-                <NavLink to='/search' className={s.navsElement}>{i18next.t('findPhotoNav')}</NavLink>
-                <NavLink to='/collection' className={s.navsElement}>{i18next.t('collectionNav')}</NavLink>
+                <div className={s.navsElement}>{i18next.t('findPhotoNav')}</div>
+                <NavLink
+                    to='/collection'
+                    className={s.navsElement}
+                    onClick={() => {
+                        props.setPhotos([], true);
+                        let photos = props.getStorage('collection').split(',');
+                        photos.map(photoId => {
+                            (photoId && photoId !== '') &&
+                            getPhotoAPI(photoId, true).then(res => {
+                                props.setPhotos([res], false);
+                            });
+                        })
+                    }}
+                >
+                    {i18next.t('collectionNav')}
+                </NavLink>
                 <div className={s.navsElement}>{i18next.t('licenceNav')}</div>
                 <LightTooltip
                     title={<LangComp/>}
@@ -163,7 +186,7 @@ const Navbar = (props) => {
 }
 
 export default compose(
-withRouter
+    withRouter
 )(Navbar);
 
 // export default Navbar;
