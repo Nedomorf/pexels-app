@@ -17,10 +17,8 @@ export const setPhotosAPI = (page, isSearch, query) => {
         .then(result => result)
 }
 
-export const getPhotoAPI = (photoId, isBanner) => {
-    return isBanner
-        ? fetch(`https://api.pexels.com/v1/photos/${photoId}`, config)
+export const getPhotoAPI = (photoId) => {
+    return fetch(`https://api.pexels.com/v1/photos/${photoId}`, config)
             .then(res => res.json())
             .then(result => result)
-        : null
 }

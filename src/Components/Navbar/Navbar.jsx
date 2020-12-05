@@ -78,7 +78,7 @@ const Navbar = (props) => {
         let photos = props.getStorage('collection').split(',');
         photos.map(photoId => {
             (photoId && photoId !== '') &&
-            getPhotoAPI(photoId, true).then(res => {
+            getPhotoAPI(photoId).then(res => {
                 props.setPhotos([res], false);
             });
         })

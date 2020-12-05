@@ -14,7 +14,7 @@ const Banner = (props) => {
         props.setInitialize(false);
         let photoId = Math.random() * 9999999;
         photoId = Math.round(photoId);
-        props.getPhotoAPI(photoId, true).then(photo => {
+        props.getPhotoAPI(photoId).then(photo => {
             console.log(photo)
             if (photo.src) {
                 setUrl(photo.src.landscape);
