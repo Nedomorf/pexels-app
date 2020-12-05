@@ -1,27 +1,29 @@
 {
   "files": {
-    "main.css": "/pexels-app/static/css/main.48bdbc3d.chunk.css",
-    "main.js": "/pexels-app/static/js/main.a0ccaba5.chunk.js",
-    "main.js.map": "/pexels-app/static/js/main.a0ccaba5.chunk.js.map",
-    "runtime-main.js": "/pexels-app/static/js/runtime-main.58e4f873.js",
-    "runtime-main.js.map": "/pexels-app/static/js/runtime-main.58e4f873.js.map",
+    "main.css": "/pexels-app/static/css/main.4ace9133.chunk.css",
+    "main.js": "/pexels-app/static/js/main.5bafb394.chunk.js",
+    "main.js.map": "/pexels-app/static/js/main.5bafb394.chunk.js.map",
+    "runtime-main.js": "/pexels-app/static/js/runtime-main.b84ce63c.js",
+    "runtime-main.js.map": "/pexels-app/static/js/runtime-main.b84ce63c.js.map",
     "static/css/2.679831fc.chunk.css": "/pexels-app/static/css/2.679831fc.chunk.css",
-    "static/js/2.34c9a587.chunk.js": "/pexels-app/static/js/2.34c9a587.chunk.js",
-    "static/js/2.34c9a587.chunk.js.map": "/pexels-app/static/js/2.34c9a587.chunk.js.map",
-    "static/js/3.ed058776.chunk.js": "/pexels-app/static/js/3.ed058776.chunk.js",
-    "static/js/3.ed058776.chunk.js.map": "/pexels-app/static/js/3.ed058776.chunk.js.map",
+    "static/js/2.5944890e.chunk.js": "/pexels-app/static/js/2.5944890e.chunk.js",
+    "static/js/2.5944890e.chunk.js.map": "/pexels-app/static/js/2.5944890e.chunk.js.map",
+    "static/js/3.53711e60.chunk.js": "/pexels-app/static/js/3.53711e60.chunk.js",
+    "static/js/3.53711e60.chunk.js.map": "/pexels-app/static/js/3.53711e60.chunk.js.map",
     "index.html": "/pexels-app/index.html",
     "static/css/2.679831fc.chunk.css.map": "/pexels-app/static/css/2.679831fc.chunk.css.map",
-    "static/css/main.48bdbc3d.chunk.css.map": "/pexels-app/static/css/main.48bdbc3d.chunk.css.map",
-    "static/js/2.34c9a587.chunk.js.LICENSE.txt": "/pexels-app/static/js/2.34c9a587.chunk.js.LICENSE.txt",
+    "static/css/main.4ace9133.chunk.css.map": "/pexels-app/static/css/main.4ace9133.chunk.css.map",
+    "static/js/2.5944890e.chunk.js.LICENSE.txt": "/pexels-app/static/js/2.5944890e.chunk.js.LICENSE.txt",
+    "static/media/gb-flag.4be13176.svg": "/pexels-app/static/media/gb-flag.4be13176.svg",
     "static/media/loader.924d4133.svg": "/pexels-app/static/media/loader.924d4133.svg",
-    "static/media/photoLoader.53805245.svg": "/pexels-app/static/media/photoLoader.53805245.svg"
+    "static/media/photoLoader.53805245.svg": "/pexels-app/static/media/photoLoader.53805245.svg",
+    "static/media/rus-flag.959d3e86.svg": "/pexels-app/static/media/rus-flag.959d3e86.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.58e4f873.js",
+    "static/js/runtime-main.b84ce63c.js",
     "static/css/2.679831fc.chunk.css",
-    "static/js/2.34c9a587.chunk.js",
-    "static/css/main.48bdbc3d.chunk.css",
-    "static/js/main.a0ccaba5.chunk.js"
+    "static/js/2.5944890e.chunk.js",
+    "static/css/main.4ace9133.chunk.css",
+    "static/js/main.5bafb394.chunk.js"
   ]
 }
