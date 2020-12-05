@@ -1,56 +1,12 @@
-import s from "./PhotoGallery.module.css";
+import s from "./Gallery.module.css";
 import i18next from "i18next";
 import Masonry from "react-masonry-css";
-import Photo from "../../MainPage/Photo/Photo";
+import PhotoContainer from "./Photo/PhotoContainer";
 import {Waypoint} from "react-waypoint";
-import photoLoader from "../../Common/Loaders/PhotoLoader/photoLoader.svg";
-import React, {useEffect, useState} from "react";
-import {Redirect} from "react-router-dom";
+import React from "react";
+import {PhotoLoader} from "../../Common/Loaders/PhotoLoader/PhotoLoader";
 
-export const PhotoGallery = (props) => {
-
-    const [fetching, setFetching] = useState(false);
-
-    // let query = props.history.location.pathname.replace('/search/', '');
-
-    useEffect(() => {
-        debugger
-        props.body.style.overflowY = 'visible';
-        if (props.history.location.pathname === '/collection') {
-
-        }
-        if (props.history.location.pathname.includes('/search/') && props.query !== '/') {
-            props.setPhotos([], true);
-            props.setPage(1);
-            props.setPhotosAPI(1, true, props.query).then(res => {
-                setFetching(true);
-                console.log('search:', res);
-                props.setPhotos(res.photos, false);
-            });
-            setFetching(false);
-        } else {
-            props.history.push('/')
-        }
-    }, [])
-
-    const onEnter = () => {
-        setFetching(true);
-        let page = props.page + 1;
-        props.setPage(page);
-        let isSearch = false;
-        if (props.history.location.pathname !== '/') isSearch = true;
-        props.setPhotosAPI(page, isSearch, props.query).then(res => {
-            console.log('scroll:', res);
-            props.setPhotos(res.photos, false);
-            setFetching(false);
-        });
-    }
-
-    const breakpointColumnsObj = {
-        default: 3,
-        1070: 2,
-        590: 1
-    };
+export const Gallery = (props) => {
 
     return (
         <div className={s.GalleryContainer}>
@@ -79,7 +35,7 @@ export const PhotoGallery = (props) => {
                     <>
                         <div className={s.gallery}>
                             <Masonry
-                                breakpointCols={breakpointColumnsObj}
+                                breakpointCols={props.breakpointColumnsObj}
                                 className={s.galleryGrid}
                                 columnClassName={s.galleryGridColumn}
                             >
@@ -87,31 +43,29 @@ export const PhotoGallery = (props) => {
                                     props.photos.map((photo, index) => {
                                         const DIV = (
                                             <div key={index}>
-                                                < Photo
+                                                < PhotoContainer
                                                     url={photo.src}
                                                     downloadUrl={photo.src.original}
                                                     isLiked={photo.liked}
                                                     photographer={photo.photographer}
                                                     photoId={photo.id}
-                                                    photoLoader={photoLoader}
+                                                    photoLoader={PhotoLoader}
                                                     {...props}
                                                 />
                                             </div>
                                         )
                                         return (index === props.photos.length - 5)
-                                            ? <Waypoint onEnter={onEnter}>{DIV}</Waypoint>
+                                            ? <Waypoint onEnter={props.onEnter}>{DIV}</Waypoint>
                                             : DIV
                                     })
                                 }
                             </Masonry>
                         </div>
                         {
-                            fetching && <div className={s.photoLoader}>
-                                <object type="image/svg+xml" data={photoLoader}>svg-animation</object>
-                            </div>
+                            props.fetching && <PhotoLoader/>
                         }
                     </>
-                    : fetching && <div className={s.noPhotos}>{i18next.t('noPhotos')}</div>
+                    : props.fetching && <div className={s.noPhotos}>{i18next.t('noPhotos')}</div>
             }
         </div>
     )

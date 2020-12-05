@@ -1,12 +1,13 @@
 import s from './App.module.css';
 import React, {useEffect, useState} from "react";
 import Navbar from "./Components/Navbar/Navbar";
-import MainPageContainer from "./Components/MainPage/MainPageContainer";
+import MainPage from "./Components/MainPage/MainPage";
 import {connect} from "react-redux";
 import {PageLoader} from "./Components/Common/Loaders/PageLoader/PageLoader";
-import {setPhotos} from "./Redux/main-reducer";
+import {setInitialize, setPhotos} from "./Redux/main-reducer";
 import i18next from "i18next";
-import {Redirect, Route} from "react-router-dom";
+import {withRouter} from "react-router-dom";
+import {compose} from "redux";
 
 function App(props) {
 
@@ -73,8 +74,6 @@ function App(props) {
     return (
         <div className={props.isInitialize && s.App}>
 
-            {/*<Redirect from="/pexels-app" to="/"/>*/}
-
             {
                 props.isInitialize &&
                 <Navbar
@@ -87,7 +86,8 @@ function App(props) {
                 />
             }
 
-            <MainPageContainer
+            <MainPage
+                {...props}
                 page={page}
                 setPage={setPage}
                 shortWords={shortWords}
@@ -106,11 +106,14 @@ function App(props) {
 
 const mapStateToProps = (state) => {
     return {
-        isInitialize: state.Main.isInitialize
+        isInitialize: state.Main.isInitialize,
+        photos: state.Main.photos
     }
 }
 
-const mapDispatchToProps = {setPhotos}
+const mapDispatchToProps = {setPhotos, setInitialize}
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
-
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter
+)(App);

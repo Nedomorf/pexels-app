@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import s from './Banner.module.css';
-import {getPhotoAPI, setPhotosAPI} from "../../../api/api";
 import SearchField from "../../Common/SearchField/SearchField";
 import {NavLink} from "react-router-dom";
 import i18next from "i18next";
@@ -15,8 +14,7 @@ const Banner = (props) => {
         props.setInitialize(false);
         let photoId = Math.random() * 9999999;
         photoId = Math.round(photoId);
-        // let photoId =  4553561
-        getPhotoAPI(photoId, true).then(photo => {
+        props.getPhotoAPI(photoId, true).then(photo => {
             console.log(photo)
             if (photo.src) {
                 setUrl(photo.src.landscape);
@@ -42,13 +40,12 @@ const Banner = (props) => {
                 </div>
                 <div className={s.ideas}>
                     <span>{i18next.t('ideasText')}</span>
-                    {/*<p>кофе</p><span>,</span><p>шоколад</p><span>,</span><p>кошки</p>*/}
                     {
                         props.shortWords.map(word => {
                             return (
                                 <NavLink className={s.keyWord} to={`/search/${word}`} onClick={() => {
                                     props.setInitialize(false);
-                                    setPhotosAPI(1, true, word).then(res => {
+                                    props.setPhotosAPI(1, true, word).then(res => {
                                         props.setPhotos(res.photos, true);
                                         props.setPhotos(res.photos, false);
                                         props.setInitialize(true);

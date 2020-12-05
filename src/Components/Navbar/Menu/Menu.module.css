@@ -1,0 +1,47 @@
+.menuBody {
+    position: fixed;
+    top: 70px;
+    width: 100%;
+    height: calc(100% - 70px);
+    background: rgb(35, 42, 52);
+}
+
+.menuElement {
+    position: relative;
+    font-size: 24px;
+    color: rgb(192, 195, 196);
+    margin: 10px 10px 10px 15px;
+    transition: color .1s ease;
+    display: flex;
+    align-items: center;
+}
+
+.menuElement img {
+    width: 24px;
+    margin-right: 10px;
+}
+
+.menuElement:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.menuElement:hover .navPop {
+    left: -40px;
+}
+
+.navPop {
+    background: white;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: -60px;
+    top: 0;
+    border-radius: 10px;
+    transition: left .1s ease;
+}
+
+.navBlock {
+    padding: 20px 0;
+    border-bottom: 1px #7b7d7e solid;
+}

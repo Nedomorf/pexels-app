@@ -8,6 +8,22 @@ import i18next from "i18next";
 import {compose} from "redux";
 import Tooltip from '@material-ui/core/Tooltip';
 import {withStyles} from "@material-ui/core";
+import gbFlag from '../Common/Flags/gb-flag.svg'
+import rusFlag from '../Common/Flags/rus-flag.svg'
+import {Menu} from "./Menu/Menu";
+
+const LightTooltip = withStyles((theme) => ({
+    tooltip: {
+        backgroundColor: theme.palette.common.white,
+        color: `black`,
+        boxShadow: theme.shadows[1],
+        fontSize: 16,
+        width: `300px`
+    },
+    arrow: {
+        color: theme.palette.common.white
+    }
+}))(Tooltip);
 
 const Navbar = (props) => {
 
@@ -15,24 +31,22 @@ const Navbar = (props) => {
     const [open, setOpen] = useState(false);
     const [color, setColor] = useState('rgb(192, 195, 196)');
 
-    const LightTooltip = withStyles((theme) => ({
-        tooltip: {
-            backgroundColor: theme.palette.common.white,
-            color: `black`,
-            boxShadow: theme.shadows[1],
-            fontSize: 16,
-            width: `300px`
-        },
-        arrow: {
-            color: theme.palette.common.white
-        }
-    }))(Tooltip);
+    window.onscroll = () => {
+        let scrollTop = document.body.parentElement.scrollTop;
+        (scrollTop > 100) ? setVisible(true) : setVisible(false)
+    }
 
     const LangComp = () => {
         return (
             <div className={s.tooltip}>
-                <div onClick={() => props.changeLanguage('ru')}>🇷🇺 {i18next.t('rusLangNav')}</div>
-                <div onClick={() => props.changeLanguage('en')}>🇬🇧 {i18next.t('engLangNav')}</div>
+                <div onClick={() => props.changeLanguage('ru')}>
+                    <img src={rusFlag} alt=""/>
+                    {i18next.t('rusLangNav')}
+                </div>
+                <div onClick={() => props.changeLanguage('en')}>
+                    <img src={gbFlag} alt=""/>
+                    {i18next.t('engLangNav')}
+                </div>
                 {
                     (window.innerWidth < 1260) &&
                     <>
@@ -49,12 +63,6 @@ const Navbar = (props) => {
         )
     }
 
-    window.onscroll = () => {
-        let scrollTop = document.body.parentElement.scrollTop;
-        // (!props.location.pathname.includes('/search') || props.history.location.pathname !== '/collection') &&
-        (scrollTop > 100) ? setVisible(true) : setVisible(false)
-    }
-
     const toggleMenu = () => {
         setOpen(!open);
         setVisible(!open);
@@ -65,12 +73,24 @@ const Navbar = (props) => {
             : props.body.style.overflowY = 'hidden'
     }
 
+    const setCollection = () => {
+        props.setPhotos([], true);
+        let photos = props.getStorage('collection').split(',');
+        photos.map(photoId => {
+            (photoId && photoId !== '') &&
+            getPhotoAPI(photoId, true).then(res => {
+                props.setPhotos([res], false);
+            });
+        })
+        setOpen(false);
+    }
+
     const toggleHover = isHover => isHover ? setColor('white') : setColor('rgb(192, 195, 196)')
 
     return (
         <div className={`${s.Navbar} ${(
             visible || props.location.pathname.includes('/search') || props.location.pathname === '/collection'
-            ) && s.NavVisible}`}>
+        ) && s.NavVisible}`}>
             <NavLink
                 to='/'
                 className={s.logoContainer}
@@ -98,7 +118,7 @@ const Navbar = (props) => {
                 ${s.search} 
                 ${(
                     visible || props.location.pathname.includes('/search') || props.location.pathname === '/collection'
-                    ) && s.searchVisiable}
+                ) && s.searchVisiable}
                 `}>
                 <SearchField text={i18next.t('navSearchPlaceholder')}/>
             </div>
@@ -107,16 +127,7 @@ const Navbar = (props) => {
                 <NavLink
                     to='/collection'
                     className={s.navsElement}
-                    onClick={() => {
-                        props.setPhotos([], true);
-                        let photos = props.getStorage('collection').split(',');
-                        photos.map(photoId => {
-                            (photoId && photoId !== '') &&
-                            getPhotoAPI(photoId, true).then(res => {
-                                props.setPhotos([res], false);
-                            });
-                        })
-                    }}
+                    onClick={() => setCollection()}
                 >
                     {i18next.t('collectionNav')}
                 </NavLink>
@@ -137,49 +148,14 @@ const Navbar = (props) => {
             </div>
             {
                 open &&
-                <div className={s.menuBody}>
-                    <div className={s.navBlock}>
-                        <div className={s.menuElement}>
-                            <NavLink
-                                to='/'
-                                style={{textDecoration: `none`, color: color}}>
-                                {i18next.t('mainNav')}
-                            </NavLink>
-                            <div className={s.navPop}/>
-                        </div>
-                    </div>
-                    <div className={s.navBlock}>
-                        <div className={s.menuElement}>
-                            {i18next.t('findPhotoNav')}
-                            <div className={s.navPop}/>
-                        </div>
-                        <div className={s.menuElement}
-                             onMouseEnter={() => toggleHover(true)}
-                             onMouseLeave={() => toggleHover(false)}
-                        >
-                            <NavLink
-                                to='/collection'
-                                style={{textDecoration: `none`, color: color}}>
-                                {i18next.t('collectionNav')}
-                            </NavLink>
-                            <div className={s.navPop}/>
-                        </div>
-                        <div className={s.menuElement}>
-                            {i18next.t('licenceNav')}
-                            <div className={s.navPop}/>
-                        </div>
-                    </div>
-                    <div className={s.navBlock}>
-                        <div className={s.menuElement} onClick={() => props.changeLanguage('ru')}>
-                            🇷🇺 {i18next.t('rusLangNav')}
-                            <div className={s.navPop}/>
-                        </div>
-                        <div className={s.menuElement} onClick={() => props.changeLanguage('en')}>
-                            🇬🇧 {i18next.t('engLangNav')}
-                            <div className={s.navPop}/>
-                        </div>
-                    </div>
-                </div>
+                <Menu
+                    color={color}
+                    toggleHover={toggleHover}
+                    rusFlag={rusFlag}
+                    gbFlag={gbFlag}
+                    setCollection={setCollection}
+                    changeLanguage={props.changeLanguage}
+                />
             }
         </div>
     )

@@ -36,17 +36,6 @@
     margin-bottom: 30px;
 }
 
-.photoLoader {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 48px;
-}
-
-.photoLoader object {
-    width: 100%;
-}
-
 .noPhotos {
     width: 100%;
     height: 80vh;
